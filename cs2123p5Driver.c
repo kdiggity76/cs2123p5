@@ -1,6 +1,5 @@
 /******************************************************************************
-cs2123p5Driver.c by Larry Clark  (For groups, place group name here and
-list your names.  For individuals, you will not be changing this.
+cs2123p5Driver.c by Larry Clark  team name and name of members
 Purpose:
     This program manages a Price Menu for the Klunker Car Company  using a
     binary tree to represent the information.  It uses input commands to 
