@@ -64,11 +64,7 @@ Notes:
 **************************************************************************/
 void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
-<<<<<<< HEAD
-//hello people
-=======
-    
->>>>>>> Logan's-code
+
 
 }
 /******************** deleteItem *****************************
