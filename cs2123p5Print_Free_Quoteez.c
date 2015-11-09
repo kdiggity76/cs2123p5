@@ -7,7 +7,29 @@
 #include <stdlib.h>
 #include "cs2123p5.h"
 
+/******************** createTree *****************************
+Tree createTree()
+Purpose:
 
+
+Parameters:
+
+
+Notes:
+
+
+**************************************************************************/
+Tree createTree()
+{
+ Tree tree = (Tree)malloc(sizeof(TreeImp));
+    if (tree == NULL)
+        ErrExit(ERR_ALGORITHM, "malloc allocation error for TreeImp");
+    tree-&gt;
+    pRoot = NULL;
+    
+    return tree;
+
+}
 /******************** printPriceMenu *****************************
 void printPriceMenu(Tree tree)
 Purpose:
@@ -19,7 +41,6 @@ Parameters:
 Notes:
 
 
-test
 **************************************************************************/
 void printPriceMenu(Tree tree)
 {
@@ -78,7 +99,6 @@ Parameters:
 
 Notes:
 
-test
 
 
 **************************************************************************/
