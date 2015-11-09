@@ -22,8 +22,14 @@ Notes:
 **************************************************************************/
 NodeT *findId(NodeT *p, char szId[])
 {
-
-
+    if (strcmp(szId, p->element.szId)==0) {
+        return p;
+    else if(strcmp(p->element.cNodeType, 'O')==0)
+        findId(p->pChild, szId);
+    else if(strcmp(p->element.cNodeType, 'V')==0)
+        findId(p->pSibling, szId);
+    else
+        return NULL;
 }
 /******************** findParent *****************************
 NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
@@ -58,7 +64,11 @@ Notes:
 **************************************************************************/
 void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
-
+<<<<<<< HEAD
+//hello people
+=======
+    
+>>>>>>> Logan's-code
 
 }
 /******************** deleteItem *****************************
