@@ -25,7 +25,6 @@ Tree createTree()
     if (tree == NULL)
         ErrExit(ERR_ALGORITHM, "malloc allocation error for TreeImp");
     tree-&gt;
-    pRoot = NULL;
     
     return tree;
 
