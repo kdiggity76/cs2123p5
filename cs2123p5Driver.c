@@ -174,9 +174,11 @@ processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			//next token is the positive or negative cost
 			pszInput = getToken(pszInput, Token, MAX_TOKEN_SIZE);
 			element.dCost = atof(Token);
-			//last token should be the title
-			strcpypszInput; 
-			
+			//last token should be the title, string copied into element.szTitle
+			strcpy(Token, element.szTitle); 
+
+			//once all elements are finished, element is inserted into insertPriceMenu
+			//along with the tre and Parent ID
 			insertPriceMenu(tree, element, char szParentId[]);
 		else if(strcmp(Token, "OPTION") == 0))
 			/*
