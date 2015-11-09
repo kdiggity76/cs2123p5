@@ -47,7 +47,7 @@ void printOne(Tree tree, char szId[])
 /******************** freeSubTree *****************************
 void freeSubTree(NodeT *p)
 Purpose:
-
+Deallocates the memory for the node and all of its subnodes.
 
 Parameters:
 
@@ -59,13 +59,19 @@ Notes:
 **************************************************************************/
 void freeSubTree(NodeT *p)
 {
-
-
+    //do nothing if passed a non-existant node
+    if (p == NULL)
+        return;
+    //deallocates nodes
+    freeSubTree(p->pChild);
+    freeSubTree(p->pSibling);
+    free(p);
 }
 /******************** freeTree *****************************
 void freeTree(Tree tree)
 Purpose:
-
+Deallocate the tree memory and all of its nodes using freeSubTree to
+deallocate the nodes.
 
 Parameters:
 
@@ -77,6 +83,10 @@ Notes:
 **************************************************************************/
 void freeTree(Tree tree)
 {
-
-
+    //do nothing if passed a non-existant tree
+    if (tree == NULL)
+        return;
+    //deallocates all nodes
+    freeSubTree(tree->pRoot);
+    free(tree);
 }
