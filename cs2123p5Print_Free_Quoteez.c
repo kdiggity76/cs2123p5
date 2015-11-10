@@ -7,31 +7,7 @@
 #include <stdlib.h>
 #include "cs2123p5.h"
 
-/******************** createTree *****************************
-Tree createTree()
-Purpose:
 
-
-Parameters:
-
-
-Notes:
-
-
-**************************************************************************/
-Tree testTree()
-{
- Tree tree = (Tree)malloc(sizeof(TreeImp));
-    if (tree == NULL)
-        ErrExit(ERR_ALGORITHM, "malloc allocation error for TreeImp");
-    tree-&gt;
-    tree.pRoot.element.szTitle = "Model";
-    tree.pRoot.pChild.element.szTitle = "Engine";
-    tree.pRoot.
-    tree.pRoot.pSibling.element = "Warrenty";
-    return tree;
-
-}
 /******************** printPriceMenu *****************************
 void printPriceMenu(Tree tree)
 Purpose:
