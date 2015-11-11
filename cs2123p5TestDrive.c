@@ -21,78 +21,78 @@ int main()
     Tree tree = newTree();                          // Binary tree
     char szInputBuffer[MAX_LINE_SIZE + 1];          // input text line
 
-    Element elementA = (Element)malloc(sizeof(Element));
-    Element elementB = (Element)malloc(sizeof(Element));
-    Element elementC = (Element)malloc(sizeof(Element));
-    Element elementD = (Element)malloc(sizeof(Element));
-    Element elementE = (Element)malloc(sizeof(Element));
-    Element elementF = (Element)malloc(sizeof(Element));
-    Element elementG = (Element)malloc(sizeof(Element));
-    Element elementH = (Element)malloc(sizeof(Element));
-    Element elementI = (Element)malloc(sizeof(Element));
-    Element elementJ = (Element)malloc(sizeof(Element));
-    Element elementK = (Element)malloc(sizeof(Element));
+    Element *elementA = (Element *)malloc(sizeof(Element));
+    Element *elementB = (Element *)malloc(sizeof(Element));
+    Element *elementC = (Element *)malloc(sizeof(Element));
+    Element *elementD = (Element *)malloc(sizeof(Element));
+    Element *elementE = (Element *)malloc(sizeof(Element));
+    Element *elementF = (Element *)malloc(sizeof(Element));
+    Element *elementG = (Element *)malloc(sizeof(Element));
+    Element *elementH = (Element *)malloc(sizeof(Element));
+    Element *elementI = (Element *)malloc(sizeof(Element));
+    Element *elementJ = (Element *)malloc(sizeof(Element));
+    Element *elementK = (Element *)malloc(sizeof(Element));
 
-    elementA.cNodeType = 'O';
-    strcpy(elementA.szTitle, "Model");
-    strcpy(elementA.szId, "model");
+    elementA->cNodeType = 'O';
+    strcpy(elementA->szTitle, "Model");
+    strcpy(elementA->szId, "model");
 
-    elementB.cNodeType = 'V';
-    strcpy(elementA.szId, "base");
-    elementB.cCostInd = 'Y';
-    elementB.dCost = 17000.00;
-    strcpy(elementA.szTitle, "Base");
+    elementB->cNodeType = 'V';
+    strcpy(elementA->szId, "base");
+    elementB->cCostInd = 'Y';
+    elementB->dCost = 17000.00;
+    strcpy(elementA->szTitle, "Base");
 
-    elementC.cNodeType = 'V';
-    strcpy(elementC.szId, "lx");
-    elementC.cCostInd = 'Y';
-    elementC.dCost = 19000.00;
-    strcpy(elementC.szTitle, "Plus");
+    elementC->cNodeType = 'V';
+    strcpy(elementC->szId, "lx");
+    elementC->cCostInd = 'Y';
+    elementC->dCost = 19000.00;
+    strcpy(elementC->szTitle, "Plus");
 
-    elementD.cNodeType = 'O';
-    strcpy(elementD.szId, "engine_base");
-    strcpy(elementD.szTitle, "Engine");
+    elementD->cNodeType = 'O';
+    strcpy(elementD->szId, "engine_base");
+    strcpy(elementD->szTitle, "Engine");
 
-    elementE.cNodeType = 'O';
-    strcpy(elementE.szId, "color_base");
-    strcpy(elementE.szTitle, "Color");
+    elementE->cNodeType = 'O';
+    strcpy(elementE->szId, "color_base");
+    strcpy(elementE->szTitle, "Color");
 
-    elementF.cNodeType = 'O';
-    strcpy(elementF.szId, "engine_LX");
-    strcpy(elementF.szTitle, "Engine");
+    elementF->cNodeType = 'O';
+    strcpy(elementF->szId, "engine_LX");
+    strcpy(elementF->szTitle, "Engine");
 
-    elementG.cNodeType = 'O';
-    strcpy(elementG.szId, "color_LX");
-    strcpy(elementG.szTitle, "Color");
+    elementG->cNodeType = 'O';
+    strcpy(elementG->szId, "color_LX");
+    strcpy(elementG->szTitle, "Color");
 
-    elementH.cNodeType = 'V';
-    strcpy(elementH.szId, "eng18AutBase");
-    elementH.cCostInd = 'Y';
-    elementH.dCost = 0.00;
-    strcpy(elementH.szTitle, "1.8-liter 4 Cyl Automatic");
+    elementH->cNodeType = 'V';
+    strcpy(elementH->szId, "eng18AutBase");
+    elementH->cCostInd = 'Y';
+    elementH->dCost = 0.00;
+    strcpy(elementH->szTitle, "1.8-liter 4 Cyl Automatic");
 
-    elementI.cNodeType = 'V';
-    strcpy(elementI.szId, "eng18ManBase");
-    elementI.cCostInd = 'Y';
-    elementI.dCost = 0.00;
-    strcpy(elementI.szTitle, "1.8-liter 4 Cyl 6spd Manual");
+    elementI->cNodeType = 'V';
+    strcpy(elementI->szId, "eng18ManBase");
+    elementI->cCostInd = 'Y';
+    elementI->dCost = 0.00;
+    strcpy(elementI->szTitle, "1.8-liter 4 Cyl 6spd Manual");
 
-    elementJ.cNodeType = 'V';
-    strcpy(elementJ.szId, "whitebase");
-    elementJ.cCostInd = 'Y';
-    elementJ.dCost = 0.00;
-    strcpy(elementJ.szTitle, "White");
+    elementJ->cNodeType = 'V';
+    strcpy(elementJ->szId, "whitebase");
+    elementJ->cCostInd = 'Y';
+    elementJ->dCost = 0.00;
+    strcpy(elementJ->szTitle, "White");
 
-    tree->pRoot->pChild->element = elementA;
-    tree->pRoot->pChild->pChild->element = elementB;
-    tree->pRoot->pChild->pChild->pSibling->element = elementC;
-    tree->pRoot->pChild->pChild->pChild->element = elementD;
-    tree->pRoot->pChild->pChild->pChild->pSibling->element = elementE;
-    tree->pRoot->pChild->pChild->pSibling->pChild->element = elementF;
-    tree->pRoot->pChild->pChild->pSibling->pChild->pSibling->element = elementG;
-    tree->pRoot->pChild->pChild->pChild->pChild->element = elementH;
-    tree->pRoot->pChild->pChild->pChild->pChild->pSibling->element = elementI;
-    tree->pRoot->pChild->pChild->pChild->pSibling->pChild->element = elementJ;
+    tree->pRoot->pChild->element = *elementA;
+    tree->pRoot->pChild->pChild->element = *elementB;
+    tree->pRoot->pChild->pChild->pSibling->element = *elementC;
+    tree->pRoot->pChild->pChild->pChild->element = *elementD;
+    tree->pRoot->pChild->pChild->pChild->pSibling->element = *elementE;
+    tree->pRoot->pChild->pChild->pSibling->pChild->element = *elementF;
+    tree->pRoot->pChild->pChild->pSibling->pChild->pSibling->element = *elementG;
+    tree->pRoot->pChild->pChild->pChild->pChild->element = *elementH;
+    tree->pRoot->pChild->pChild->pChild->pChild->pSibling->element = *elementI;
+    tree->pRoot->pChild->pChild->pChild->pSibling->pChild->element = *elementJ;
 
     freeSubTree(tree->pRoot->pChild);
 
