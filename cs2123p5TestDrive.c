@@ -21,17 +21,17 @@ int main()
     Tree tree = newTree();                          // Binary tree
     char szInputBuffer[MAX_LINE_SIZE + 1];          // input text line
 
-    Element elementA;
-    Element elementB;
-    Element elementC;
-    Element elementD;
-    Element elementE;
-    Element elementF;
-    Element elementG;
-    Element elementH;
-    Element elementI;
-    Element elementJ;
-    Element elementK;
+    Element elementA = (Element)malloc(sizeof(Element));
+    Element elementB = (Element)malloc(sizeof(Element));
+    Element elementC = (Element)malloc(sizeof(Element));
+    Element elementD = (Element)malloc(sizeof(Element));
+    Element elementE = (Element)malloc(sizeof(Element));
+    Element elementF = (Element)malloc(sizeof(Element));
+    Element elementG = (Element)malloc(sizeof(Element));
+    Element elementH = (Element)malloc(sizeof(Element));
+    Element elementI = (Element)malloc(sizeof(Element));
+    Element elementJ = (Element)malloc(sizeof(Element));
+    Element elementK = (Element)malloc(sizeof(Element));
 
     elementA.cNodeType = 'O';
     strcpy(elementA.szTitle, "Model");
