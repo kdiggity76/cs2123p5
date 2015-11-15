@@ -15,90 +15,27 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "cs2123p5.h"
+void insert(Tree *tree, NodeT *item);
 
 int main()
 {
-    Tree tree = newTree();                          // Binary tree
-    char szInputBuffer[MAX_LINE_SIZE + 1];          // input text line
+    Tree ptree = newTree();                          // Binary tree
 
-    Element *elementA = (Element *)malloc(sizeof(Element));
-    Element *elementB = (Element *)malloc(sizeof(Element));
-    Element *elementC = (Element *)malloc(sizeof(Element));
-    Element *elementD = (Element *)malloc(sizeof(Element));
-    Element *elementE = (Element *)malloc(sizeof(Element));
-    Element *elementF = (Element *)malloc(sizeof(Element));
-    Element *elementG = (Element *)malloc(sizeof(Element));
-    Element *elementH = (Element *)malloc(sizeof(Element));
-    Element *elementI = (Element *)malloc(sizeof(Element));
-    Element *elementJ = (Element *)malloc(sizeof(Element));
-    Element *elementK = (Element *)malloc(sizeof(Element));
+    NodeT *pModel = createNode("model", 'O', 0.00, "Model");
+    NodeT *pBase = createNode("base", 'V', 12000.00, "Base");
+    NodeT *pLX = createNode("lx", 'V', 15000.00, "LX");
 
-    elementA->cNodeType = 'O';
-    strcpy(elementA->szTitle, "Model");
-    strcpy(elementA->szId, "model");
+    ptree->pRoot = pModel;
+    pModel->pChild = pBase;
+    pBase->pSibling = pLX;
+    NodeT *pAudio = createNode("BaseAudio", 'O', 0.00, "audio");
+    pBase->pChild = pAudio;
 
-    elementB->cNodeType = 'V';
-    strcpy(elementA->szId, "base");
-    elementB->cCostInd = 'Y';
-    elementB->dCost = 17000.00;
-    strcpy(elementA->szTitle, "Base");
-
-    elementC->cNodeType = 'V';
-    strcpy(elementC->szId, "lx");
-    elementC->cCostInd = 'Y';
-    elementC->dCost = 19000.00;
-    strcpy(elementC->szTitle, "Plus");
-
-    elementD->cNodeType = 'O';
-    strcpy(elementD->szId, "engine_base");
-    strcpy(elementD->szTitle, "Engine");
-
-    elementE->cNodeType = 'O';
-    strcpy(elementE->szId, "color_base");
-    strcpy(elementE->szTitle, "Color");
-
-    elementF->cNodeType = 'O';
-    strcpy(elementF->szId, "engine_LX");
-    strcpy(elementF->szTitle, "Engine");
-
-    elementG->cNodeType = 'O';
-    strcpy(elementG->szId, "color_LX");
-    strcpy(elementG->szTitle, "Color");
-
-    elementH->cNodeType = 'V';
-    strcpy(elementH->szId, "eng18AutBase");
-    elementH->cCostInd = 'Y';
-    elementH->dCost = 0.00;
-    strcpy(elementH->szTitle, "1.8-liter 4 Cyl Automatic");
-
-    elementI->cNodeType = 'V';
-    strcpy(elementI->szId, "eng18ManBase");
-    elementI->cCostInd = 'Y';
-    elementI->dCost = 0.00;
-    strcpy(elementI->szTitle, "1.8-liter 4 Cyl 6spd Manual");
-
-    elementJ->cNodeType = 'V';
-    strcpy(elementJ->szId, "whitebase");
-    elementJ->cCostInd = 'Y';
-    elementJ->dCost = 0.00;
-    strcpy(elementJ->szTitle, "White");
-
-    tree->pRoot->pChild->element = *elementA;
-    tree->pRoot->pChild->pChild->element = *elementB;
-    tree->pRoot->pChild->pChild->pSibling->element = *elementC;
-    tree->pRoot->pChild->pChild->pChild->element = *elementD;
-    tree->pRoot->pChild->pChild->pChild->pSibling->element = *elementE;
-    tree->pRoot->pChild->pChild->pSibling->pChild->element = *elementF;
-    tree->pRoot->pChild->pChild->pSibling->pChild->pSibling->element = *elementG;
-    tree->pRoot->pChild->pChild->pChild->pChild->element = *elementH;
-    tree->pRoot->pChild->pChild->pChild->pChild->pSibling->element = *elementI;
-    tree->pRoot->pChild->pChild->pChild->pSibling->pChild->element = *elementJ;
-
-    freeSubTree(tree->pRoot->pChild);
+    freeSubTree(ptree->pRoot->pChild);
 
 
     // Free the tree, quote selection and stdin
-    freeTree(tree);
+    freeTree(ptree);
     printf("\n");
     return 0;
 }
@@ -121,6 +58,17 @@ Tree newTree()
         ErrExit(ERR_ALGORITHM, "malloc allocation error for TreeImp");
     tree->pRoot = NULL;
     return tree;
+}
+
+NodeT* createNode(char *szID, char cType, double cost, char *szTitle)
+{
+	NodeT* node = malloc(sizeof(NodeT));
+	strcpy(node->element.szId, szID);
+	node->element.cNodeType = cType;
+	node->element.dCost = cost;
+	if (cType == 'V')
+		node->element.cCostInd = 'Y';
+	return node;
 }
 
 /***  U T I L I T Y functions ***/
