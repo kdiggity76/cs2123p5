@@ -22,7 +22,12 @@ Notes:
 **************************************************************************/
 NodeT *findId(NodeT *p, char szId[])
 {
-
+    if (p == NULL)
+        return p;
+    if (strcmp(p->element.szId, szId)==0)
+        return p;
+    p = findId(p->pChild, szId);
+    p = findId(p->pSibling, szId);
 
 }
 /******************** findParent *****************************
@@ -40,7 +45,7 @@ Notes:
 **************************************************************************/
 NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
 {
-    
+
 
 }
 /******************** insertPriceMenu *****************************

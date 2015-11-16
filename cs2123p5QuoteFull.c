@@ -20,11 +20,11 @@ Notes:
 
 
 **************************************************************************/
-QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
-{
+//QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
+//{
 
 
-}
+//}
 /******************** QuoteSelection *****************************
 QuoteSelection newQuoteSelection()
 Purpose:
@@ -38,8 +38,8 @@ Notes:
 
 
 **************************************************************************/
-QuoteSelection newQuoteSelection()
-{
+//QuoteSelection newQuoteSelection()
+//{
 
 
-}
+//}

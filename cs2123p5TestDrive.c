@@ -39,14 +39,14 @@ int main()
     pBEingine.pChild = &pB18Eng;
     pBEingine.pSibling = &pBColor;
     pBColor.pChild = &pBColorBlue;
-    pBEingine.pSibling = &pBAudio;
+    pBColor.pSibling = &pBAudio;
     pBAudio.pChild = &pBAudioStd;
     pModel.pSibling = &pWarrenty;
     pWarrenty.pChild = &pWarrenty1;
 
     printPriceMenu(ptree);
 
-    freeSubTree(ptree->pRoot->pChild);
+    printOne(ptree,"bluebase");
 
     printPriceMenu(ptree);
 

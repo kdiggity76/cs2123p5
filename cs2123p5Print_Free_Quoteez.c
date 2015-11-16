@@ -63,7 +63,8 @@ If node is not found the function will print nothing.
 void printOne(Tree tree, char szId[])
 {
     NodeT *pNode;
-    //pNode = findId(tree->pRoot, szId);
+    pNode = tree->pRoot;
+    pNode = findId(pNode, szId);
         if(pNode != NULL)
         {
             printf("%-8s\t%-26s\t%.2lf\n"
