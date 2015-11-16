@@ -21,21 +21,34 @@ int main()
 {
     Tree ptree = newTree();                          // Binary tree
 
-    NodeT *pModel = createNode("model", 'O', 0.00, "Model");
-    NodeT *pBase = createNode("base", 'V', 12000.00, "Base");
-    NodeT *pLX = createNode("lx", 'V', 15000.00, "LX");
+    NodeT pModel = createNode("model", 'O', 0.00, "Model");
+    NodeT pBase = createNode("base", 'V', 12000.00, "Base");
+    NodeT pBEingine = createNode("engine_base", 'O', 0.00, "Engine");
+    NodeT pB18Eng = createNode("eng18AutBase", 'V', 0.00, "1.8-liter 4 Cyl Automatic");
+    NodeT pBColor = createNode("color_base", 'O', 0.00, "Color");
+    NodeT pBColorBlue = createNode("bluebase", 'V', 50.00, "Blue");
+    NodeT pBAudio = createNode("audio_base", 'O', 0.00, "audio");
+    NodeT pBAudioStd = createNode("audioStdBase", 'V', 0.00, "Audio Std");
+    NodeT pWarrenty = createNode("warrenty", 'O', 0.00, "Warrenty");
+    NodeT pWarrenty1 = createNode("warrenty1", 'V', 500.00, "40k/3yr");
 
-    ptree->pRoot = pModel;
-    pModel->pChild = pBase;
-    pBase->pSibling = pLX;
-    NodeT *pAudio = createNode("BaseAudio", 'O', 0.00, "audio");
-    pBase->pChild = pAudio;
 
-    printPriceMenu(Tree tree);
+    ptree->pRoot = &pModel;
+    pModel.pChild = &pBase;
+    pBase.pChild = &pBEingine;
+    pBEingine.pChild = &pB18Eng;
+    pBEingine.pSibling = &pBColor;
+    pBColor.pChild = &pBColorBlue;
+    pBEingine.pSibling = &pBAudio;
+    pBAudio.pChild = &pBAudioStd;
+    pModel.pSibling = &pWarrenty;
+    pWarrenty.pChild = &pWarrenty1;
+
+    printPriceMenu(ptree);
 
     freeSubTree(ptree->pRoot->pChild);
 
-    printPriceMenu(Tree tree);
+    printPriceMenu(ptree);
 
     // Free the tree, quote selection and stdin
     freeTree(ptree);
@@ -63,15 +76,16 @@ Tree newTree()
     return tree;
 }
 
-NodeT* createNode(char *szID, char cType, double cost, char *szTitle)
+NodeT createNode(char *szID, char cType, double cost, char *szTitle)
 {
 	NodeT* node = malloc(sizeof(NodeT));
 	strcpy(node->element.szId, szID);
+	strcpy(node->element.szTitle, szTitle);
 	node->element.cNodeType = cType;
 	node->element.dCost = cost;
 	if (cType == 'V')
 		node->element.cCostInd = 'Y';
-	return node;
+	return *node;
 }
 
 /***  U T I L I T Y functions ***/

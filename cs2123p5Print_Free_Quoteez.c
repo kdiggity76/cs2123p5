@@ -22,15 +22,27 @@ Notes:
 **************************************************************************/
 void printPriceMenu(Tree tree)
 {
-
-   if (tree.pRoot != NULL)
-    {
-      printf("%d", temp->data);
-      preorder(temp->lchild);
-      preorder(temp->rchild);
-    }
-
-
+    NodeT *pNode = malloc(sizeof(NodeT));
+    pNode = tree->pRoot;
+    double dTotal = 0;
+    printNodes(pNode, &dTotal);
+    printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
+    //free(pNode);
+}
+void printNodes(NodeT *pNode, double *dTotal)
+{
+    if(pNode==NULL)
+        return;
+    if (pNode->element.cNodeType == 'O')
+        {
+            printf("%-8s\t%-26s\t%.2lf\n"
+                ,pNode->element.szTitle
+                ,pNode->pChild->element.szTitle
+                ,pNode->pChild->element.dCost);
+            *dTotal = *dTotal + pNode->pChild->element.dCost;
+        }
+    printNodes(pNode->pChild, dTotal);
+    printNodes(pNode->pSibling, dTotal);
 }
 /******************** printOne *****************************
 void printOne(Tree tree, char szId[])
@@ -47,7 +59,15 @@ Notes:
 **************************************************************************/
 void printOne(Tree tree, char szId[])
 {
-
+    NodeT *pNode = malloc(sizeof(NodeT));
+    //pNode = findId(tree->pRoot, szId);
+        if(pNode != NULL)
+        {
+            printf("%-8s\t%-26s\t%.2lf\n"
+                    ,pNode->element.szTitle
+                    ,pNode->element.szTitle
+                    ,pNode->element.dCost);
+        }
 
 }
 /******************** freeSubTree *****************************
@@ -69,8 +89,8 @@ void freeSubTree(NodeT *p)
     if (p == NULL)
         return;
     //deallocates nodes
-    freeSubTree(p->pChild);
     freeSubTree(p->pSibling);
+    freeSubTree(p->pChild);
     free(p);
 }
 /******************** freeTree *****************************
