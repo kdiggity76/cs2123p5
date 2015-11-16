@@ -56,13 +56,8 @@ NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
     }
     else
     {
-        if (p->pChild == NULL)
-            return findParent(pParent, p->pSibling, pkid);
-        else
-        {
-            pParent = p;
-            return findParent(pParent, p->pChild, pkid);
-        }
+        return findParent(p, p->pChild, pkid);
+        return findParent(pParent, p->pSibling, pkid);
     }
 }
 /******************** insertPriceMenu *****************************
