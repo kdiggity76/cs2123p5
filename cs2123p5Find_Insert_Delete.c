@@ -51,9 +51,7 @@ NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
         return NULL;
     
     if (p == pkid)
-    {
         return pParent;
-    }
     else
     {
         return findParent(p, p->pChild, pkid);
