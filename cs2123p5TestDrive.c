@@ -15,6 +15,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "cs2123p5.h"
+
 void insert(Tree *tree, NodeT *item);
 
 int main()
@@ -49,7 +50,7 @@ int main()
     NodeT *pRoot = ptree->pRoot;
     NodeT *pParent = NULL;
     NodeT pKid= pBAudio;
-    pParent = findParent(pParent, pRoot, pKid);
+    pParent = findParent(pParent, pRoot, &pKid);
 
     printf("%s\t\n", pParent->element.szTitle);
 

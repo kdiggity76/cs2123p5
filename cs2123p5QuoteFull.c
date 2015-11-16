@@ -20,26 +20,8 @@ Notes:
 
 
 **************************************************************************/
-//QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
-//{
+QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
+{
 
 
-//}
-/******************** QuoteSelection *****************************
-QuoteSelection newQuoteSelection()
-Purpose:
-
-
-Parameters:
-
-
-Notes:
-
-
-
-**************************************************************************/
-//QuoteSelection newQuoteSelection()
-//{
-
-
-//}
+}

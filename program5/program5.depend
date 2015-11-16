@@ -6,30 +6,30 @@
 	<stdlib.h>
 	"cs2123p5.h"
 
-1447691640 /home/kdiggity/CS2123/program5/cs2123p5/cs2123p5.h
+1447701076 /home/kdiggity/CS2123/program5/cs2123p5/cs2123p5.h
 
-1447699692 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Find_Insert_Delete.c
+1447700964 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Find_Insert_Delete.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
 	<stdlib.h>
 	"cs2123p5.h"
 
-1447698353 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Print_Free_Quoteez.c
+1447700964 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Print_Free_Quoteez.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
 	<stdlib.h>
 	"cs2123p5.h"
 
-1447693068 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5QuoteFull.c
+1447700964 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5QuoteFull.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
 	<stdlib.h>
 	"cs2123p5.h"
 
-1447699372 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5TestDrive.c
+1447701266 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5TestDrive.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
