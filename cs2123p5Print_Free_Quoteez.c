@@ -22,12 +22,12 @@ Notes:
 **************************************************************************/
 void printPriceMenu(Tree tree)
 {
-    NodeT *pNode = malloc(sizeof(NodeT));
+    NodeT *pNode = (NodeT *)malloc(sizeof(NodeT));
     pNode = tree->pRoot;
     double dTotal = 0;
     printNodes(pNode, &dTotal);
     printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
-    //free(pNode);
+    free(pNode);
 }
 void printNodes(NodeT *pNode, double *dTotal)
 {
@@ -59,7 +59,7 @@ Notes:
 **************************************************************************/
 void printOne(Tree tree, char szId[])
 {
-    NodeT *pNode = malloc(sizeof(NodeT));
+    NodeT *pNode = (NodeT *)malloc(sizeof(NodeT));
     //pNode = findId(tree->pRoot, szId);
         if(pNode != NULL)
         {
@@ -68,7 +68,7 @@ void printOne(Tree tree, char szId[])
                     ,pNode->element.szTitle
                     ,pNode->element.dCost);
         }
-
+    free (pNode);
 }
 /******************** freeSubTree *****************************
 void freeSubTree(NodeT *p)
@@ -91,7 +91,7 @@ void freeSubTree(NodeT *p)
     //deallocates nodes
     freeSubTree(p->pSibling);
     freeSubTree(p->pChild);
-    free(p);
+    free (p);
 }
 /******************** freeTree *****************************
 void freeTree(Tree tree)
@@ -114,5 +114,5 @@ void freeTree(Tree tree)
         return;
     //deallocates all nodes
     freeSubTree(tree->pRoot);
-    free(tree);
+    free (tree);
 }
