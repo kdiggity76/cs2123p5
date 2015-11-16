@@ -143,7 +143,11 @@ void freeTree(Tree tree);
 void insertPriceMenu(Tree tree, Element element, char szParentId[]);
 QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection);
 void deleteItem(Tree tree, char szId[]);
+<<<<<<< HEAD
+//created by Kevin
+=======
 NodeT createNode(char *szID, char cType, double cost, char *szTitle);
+>>>>>>> master
 void printNodes(NodeT *pNode, double *dTotal);
 
 // Driver function to process a input data line.  Groups must write this function

@@ -35,6 +35,13 @@ Input:
         szOptionId doesn't exist.  If the node containing the szOptionId isn't
         an OPTION, print a warning.
 <<<<<<< HEAD
+    PRINT ALL 
+        prints the entire tree in a pretty print style (see sample output).
+    PRINT ONE szId 
+        prints one item 
+    QUOTE BEGIN 
+=======
+<<<<<<< HEAD
 
     PRINT ALL
         prints the entire tree in a pretty print style (see sample output).
@@ -48,6 +55,7 @@ Input:
     PRINT ONE szId
         prints one item
     QUOTE BEGIN
+>>>>>>> master
 >>>>>>> master
         starts a quote selection.  determineQuote isn't called.
     QUOTE OPTION iLevel szOptionId iSelection
@@ -70,6 +78,14 @@ Input:
         WARRANTY  70k/5yr                     900
         Total                               17850
 <<<<<<< HEAD
+    DELETE szId	
+        This causes the specified node to be deleted 
+        from the tree.  As a result, its parent should no longer reference it.  
+        It and its descendants must be freed.  Do not delete its immediate siblings.  
+        For example, deleting the base should remove it from its parent's value chain, 
+        but should not cause PLUS and OY to be deleted.   
+=======
+<<<<<<< HEAD
 
     DELETE szId
         This causes the specified node to be deleted
@@ -84,6 +100,7 @@ Input:
         It and its descendants must be freed.  Do not delete its immediate siblings.
         For example, deleting the base should remove it from its parent's value chain,
         but should not cause PLUS and OY to be deleted.
+>>>>>>> master
 >>>>>>> master
         Print a warning if the szId doesn't already exist.
     *	a comment in the data.  It is only used to explain the data.
@@ -122,7 +139,7 @@ int main()
     // Read command lines until EOF
     while (fgets(szInputBuffer, MAX_LINE_SIZE, stdin) != NULL)
     {
-        printf("%s", szInputBuffer);
+        //printf("%s", szInputBuffer);
 
         // If the line is just a comment or empty, ignore it
         if (szInputBuffer[0] == '*'  || szInputBuffer[0] == '\0')
@@ -140,12 +157,23 @@ int main()
 }
 
 // Driver function to process a input data line.  Groups must write this function
+<<<<<<< HEAD
+void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
+	
+	//Tree node for traversing tree in functions needing a traversal pointer
+	NodeT pTreeNode;
+	//token type for getToken
+	Token szToken;
+	
+	//Element type that will save data for various functions that ask for 'element'
+=======
 processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 
 	//need to get parentID and szId from szInputBuffer....
 	/* 	element type created for below functions requiring element (possibly to load information from
 		tree/quote info into element for evaluation???)
 	*/
+>>>>>>> master
 	Element element;
 	/* Note: element consists of these traits:
 		char   cNodeType;		      // 'O' - option, 'V' - value
@@ -154,6 +182,24 @@ processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 		char   cCostInd;              // Y - it has a cost, N - it does not have a cost
 		double dCost;
 	*/
+<<<<<<< HEAD
+	//stores the return code from determineQuote() for return code switch case
+	int iQuoteCode;
+	char *pszInput, szTempParentID[MAX_ID_SIZE + 1];
+	//pszInput starts at szInputBuffer
+	pszInput = szInputBuffer;
+	//get first token
+	pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+	//If it is a '*' then bail out of function to get next line
+	if(szToken[0] = '*')
+		return;
+
+	if (strcmp(szToken, "DEFINE") == 0){
+		//get next token in buffer
+		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+
+		if(strcmp(szToken, "VALUE") == 0){
+=======
 
 	char *pszInput;
 	//pszInput starts at szInputBuffer
@@ -169,10 +215,50 @@ processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 		pszInput = getToken(pszInput, Token, MAX_TOKEN_SIZE);
 
 		if(strcmp(Token, "VALUE") == 0))
+>>>>>>> master
 			/*
 				*inserts one menu item into the tree.  This is used from the DEFINE command.
 				*tree inserted from Tree type at beginning of function
 				*element inserted from Element type created in function
+<<<<<<< HEAD
+				*ParentID is given by the Input data 
+			*/
+			//create element traits and unique ID based on data given by the buffer
+			//set cNodeType of element to V for value
+			element.cNodeType = 'V';
+			//next token should be the ID of the branch node/element, copied into szID
+			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+			memset(element.szId, '\0', sizeof(element.szId));
+   			strcpy(element.szId, szToken);
+			//next Token is the optionID of the parent node, copied into tempParentID
+			//after tempParentID is NULL'd by memset
+			//and passed to insertPriceMenu function
+			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE); 
+			memset(szTempParentID, '\0', sizeof(szTempParentID));
+   			strcpy(szTempParentID, szToken);
+			
+			//check that the parent ID actually exists...
+			//might need to use "&element.szId, etc" instead of "element.szId"
+			//findParent(NodeT *pParent, NodeT *p, NodeT *pkid);
+
+			//next token is the cost indicator
+			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+			element.cCostInd = szToken[0];
+			//next token is the positive or negative cost
+			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+			element.dCost = atof(szToken);
+			//last token should be the title, string copied into element.szTitle
+			memset(pszInput, '\0', sizeof(pszInput));
+			strcpy(pszInput, element.szTitle); 
+
+			//once all elements are finished, element is inserted into insertPriceMenu
+			//along with the tre and Parent ID
+			insertPriceMenu(tree, element, szTempParentID);
+
+			//possibly reset all element string values to '\0' to prevent old data being passed to new nodes?f
+			
+		}else if(strcmp(szToken, "OPTION") == 0){
+=======
 			*/
 +			//create element traits and unique ID based on data given by the buffer
 			DEFINE VALUE szId szOptionId cCostInd dCost szTitle
@@ -199,10 +285,141 @@ processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 
 			insertPriceMenu(tree, element, char szParentId[]);
 		else if(strcmp(Token, "OPTION") == 0))
+>>>>>>> master
 			/*
 				*inserts one menu item into the tree.  This is used from the DEFINE command.
 				*tree inserted from Tree type at beginning of function
 				*element inserted from Element type created in function
+<<<<<<< HEAD
+				*ParentID is given by the Input data 
+			*/
+			//create element traits and unique ID based on data given by the buffer
+			//set cNodeType of element to O for Option
+			element.cNodeType = 'O';
+			//next token should be the ID of the branch node/element, copied into szID
+			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+			memset(element.szId, '\0', sizeof(element.szId));
+   			strcpy(element.szId, szToken);
+			//next Token is the ID of the parent node, which is saved to tempParentID
+			//after tempParentID is NULL'd by memset
+			//and passed to insertPriceMenu function
+			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE); 
+			memset(szTempParentID, '\0', sizeof(szTempParentID));
+   			strcpy(szTempParentID, szToken);
+
+			//check that the parent ID actually exists...
+				//find function inserted here
+
+			//last token should be the title, string copied into element.szTitle
+			memset(pszInput, '\0', sizeof(pszInput));
+			strcpy(pszInput, element.szTitle); 
+			//once all elements are finished, element is inserted into insertPriceMenu
+			//along with the tree and Parent ID
+			insertPriceMenu(tree, element, szTempParentID);
+		}else
+			printf("ERROR: DEFINE definition is not OPTION or VALUE...\n");
+
+	
+	}else if(strcmp(szToken, "PRINT") == 0){
+		
+		
+		if(strcmp(szToken, "ONE") == 0){
+				//get next token in buffer, which is the ID of the node to print
+				pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+	                	printOne(tree, szToken);
+		}else if(strcmp(szToken, "ALL") == 0)
+				//entire price menu is printed
+				printPriceMenu(tree);  
+		else
+			printf("ERROR: PRINT definition is not ONE or ALL...\n");
+
+	}else if(strcmp(szToken, "QUOTE") == 0){
+		//get next token in buffer
+		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+
+		//Might move quote begin, option, and end outside of the driver function altogether...
+		//Might be a loop
+		/*Ex if(strcmp(Token, "QUOTE") == 0)
+			//next token should be Begin			
+			getToken()
+			//getting next buffer line should be an QUOTE OPTION line
+			fgets(szInputBuffer, MAX_LINE_SIZE, stdin)
+			
+			while(strcmp(Token, "END" != 0)
+			{	
+				
+				getToken() until line is clear
+				getToken()
+				//get next line
+				fgets(szInputBuffer, MAX_LINE_SIZE, stdin)
+			}
+			//when while ends with QUOTE END
+			determineQuote(tree, quote);
+
+		*/
+
+		if (strcmp(szToken, "BEGIN") == 0){
+			//do something with "BEGIN"
+		}else if (strcmp(szToken, "OPTION") == 0){
+			//do something with "OPTION"
+		}else if(strcmp(szToken, "END") == 0){
+			//take options and compile the quote
+			//quote inserted from QuoteSelection at beginning of function
+			//tree inserted from Tree type at beginning of function
+			/*	
+				* Note that the driver must examine the returnCode and print whether 
+				* this was a total cost, partial cost, option 
+				* error, or option selection error.  
+				* For total cost and partial cost, it should also print those totals.
+			*/
+			iQuoteCode = determineQuote(tree, quote).returnCode;
+			switch (iQuoteCode)
+			{
+				case QUOTE_NORMAL:
+					printf("Full quote COMPLETE.\n");
+					//print total cost of partial quote here
+					printf("PLACEHOLDER: Print total cost here.");
+				break;
+
+				case QUOTE_PARTIAL:
+					printf("Partial quote COMPLETE.\n");
+					//print total cost of partial quote here
+					printf("PLACEHOLDER: Print total cost here.");
+					return;
+				break;
+				
+				case QUOTE_BAD_OPTION:
+					ErrExit(QUOTE_BAD_OPTION, "Option error: %d\n", iQuoteCode);
+				break;
+
+				case QUOTE_BAD_SELECTION:
+					ErrExit(QUOTE_BAD_SELECTION, "Selection error: %d\n", iQuoteCode);
+				break;
+
+				default:
+				printf("ERROR: Unknown error code returned by determineQuote.\n");
+				ErrExit(ERR_ALGORITHM, "Unknown event type: %d\n", iQuoteCode);
+			}
+			
+
+		}else
+			printf("ERROR: QUOTE definition is not BEGIN, OPTION, or END...\n");
+
+	}else if(strcmp(szToken, "DELETE") == 0){
+		/* deletes one item (and its pChild children )from the tree.  
+		It should not delete its siblings.  The deleted nodes
+		must be freed.  This is used from the DELETE command. */
+		//get next token in buffer, which is the ID of the node to delete
+		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+		deleteItem(tree, szToken);
+		
+	//not supposed to reach this level
+	}else{
+		printf("Data was not read correctly, revise code for better error handling.\n");
+		printf("Last token read was %s...\n", szToken);
+		exit(1);
+	}			
+=======
 			*/
 			insertPriceMenu(tree, element, char szParentId[]);
 		else
@@ -256,6 +473,7 @@ processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 		printf("Last token read was %s...\n", Token);
 		exit 1;
 	}
+>>>>>>> master
 }
 
 
@@ -324,7 +542,7 @@ Notes:
       in szFmt.
     - Prints the file path and file name of the program having the error.
       This is the file that contains this routine.
-    - Requires including &lt;stdarg.h&gt;
+    - Requires including <stdarg.h>
 Returns:
     Returns a program exit return code:  the value of iexitRC.
 **************************************************************************/
@@ -359,7 +577,7 @@ Notes:
     - Prints "Warning: " followed by the formatted warning message specified
       in szFmt.
     - Usually after using the warning function, your code should return.
-    - Requires including &lt;stdarg.h&gt;
+    - Requires including <stdarg.h>
 Returns:
     n/a
 **************************************************************************/
@@ -382,9 +600,13 @@ Purpose:
     It also prints usage information.
 <<<<<<< HEAD
 
+<<<<<<< HEAD
+    If this is an argument error (iArg >= 0), it prints a formatted message 
+=======
     If this is an argument error (iArg &gt;= 0), it prints a formatted message
 =======
     If this is an argument error (iArg &gt;= 0), it prints a formatted message
+>>>>>>> master
 >>>>>>> master
     showing which argument was in error, the specified message, and
     supplemental diagnostic information.  It also shows the usage. It exits
@@ -404,7 +626,7 @@ Purpose:
     It exits with USAGE_ONLY.
 Parameters:
     I int iArg                      command argument subscript or control:
-                                    &gt; 0 - command argument subscript
+                                    > 0 - command argument subscript
                                     0 - USAGE_ONLY - show usage only
                                     -1 - USAGE_ERR - show message and usage
     I char *pszMessage              error message to print
@@ -486,7 +708,11 @@ char * getToken(char *pszInputTxt, char szToken[], int iTokenSize)
         return NULL;
 
     // see if we have more characters than target token, if so, trunc
+<<<<<<< HEAD
+    if (iDelimPos > iTokenSize)
+=======
     if (iDelimPos == iTokenSize)
+>>>>>>> master
         iCopy = iTokenSize;             // truncated size
     else
         iCopy = iDelimPos;
@@ -503,3 +729,121 @@ char * getToken(char *pszInputTxt, char szToken[], int iTokenSize)
         return pszInputTxt + 1;
 }
 
+<<<<<<< HEAD
+/******************** printPriceMenu *****************************
+void printPriceMenu(Tree tree)
+Purpose:
+Print the entire tree in order format. Assigns the first node in the
+tree and then send to a recursive functions. Recusive function traverses
+the tree and prints all the Option nodes and thier corrisponding Option nodes.
+Parameters:
+I   NodeT pNode     Placeholder pointer for the root node
+I   double dTotal   Tracks total cost of the order
+Notes:
+If empty tree is passed to the function it will do nothing.
+**************************************************************************/
+void printPriceMenu(Tree tree)
+{
+    NodeT *pNode;
+    pNode = tree->pRoot;
+    double dTotal = 0;
+    printNodes(pNode, &dTotal);
+    printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
+}
+/******************** findId *****************************
+NodeT *findId(NodeT *p, char szId[])
+Purpose:
+Parameters:
+Notes:
+**************************************************************************/
+NodeT *findId(NodeT *p, char szId[])
+{
+    if (p == NULL)
+        return NULL;
+    if (strcmp(szId, p->element.szId)==0)
+        return p;
+    return findId(p->pChild, szId);
+    return findId(p->pSibling, szId);
+}
+/******************** printNodes *****************************
+void printNodes(NodeT *pNode, double *dTotal)
+Purpose:
+Parameters:
+Notes:
+**************************************************************************/
+void printNodes(NodeT *pNode, double *dTotal)
+{
+    if(pNode==NULL)
+        return;
+    if (pNode->element.cNodeType == 'O')
+        {
+            printf("%-8s\t%-26s\t%.2lf\n"
+                ,pNode->element.szTitle
+                ,pNode->pChild->element.szTitle
+                ,pNode->pChild->element.dCost);
+            *dTotal = *dTotal + pNode->pChild->element.dCost;
+        }
+    printNodes(pNode->pChild, dTotal);
+    printNodes(pNode->pSibling, dTotal);
+}
+/******************** printOne *****************************
+void printOne(Tree tree, char szId[])
+Purpose:
+Prints one item from the tree.
+This is used from the PRINT ONE command.
+Parameters:
+I   NodeT pNode     Assigned as pointer node to the result if the findID function
+I   char szID       Passed value used to find desired node in tree
+Notes:
+If node is not found the function will print nothing.
+**************************************************************************/
+void printOne(Tree tree, char szId[])
+{
+    NodeT *pNode;
+    pNode = tree->pRoot;
+    pNode = findId(pNode, szId);
+        if(pNode != NULL)
+        {
+            printf("%-8s\t%-26s\t%.2lf\n"
+                    ,pNode->element.szTitle
+                    ,pNode->element.szTitle
+                    ,pNode->element.dCost);
+        }
+}
+/******************** freeSubTree *****************************
+void freeSubTree(NodeT *p)
+Purpose:
+Deallocates the memory for the node and all of its subnodes.
+Parameters:
+I   NodeT p     Starting node to be freed
+Notes:
+**************************************************************************/
+void freeSubTree(NodeT *p)
+{
+    //do nothing if passed a non-existant node
+    if (p == NULL)
+        return;
+    //free child and sibling nodes starting from passed node
+    freeSubTree(p->pSibling);
+    freeSubTree(p->pChild);
+    free (p);
+}
+/******************** freeTree *****************************
+void freeTree(Tree tree)
+Purpose:
+Deallocate the tree memory and all of its nodes using freeSubTree to
+deallocate the nodes.
+Parameters:
+Notes:
+**************************************************************************/
+void freeTree(Tree tree)
+{
+    //do nothing if passed a non-existant tree
+    if (tree == NULL)
+        return;
+    //deallocates all nodes
+    freeSubTree(tree->pRoot);
+    free (tree);
+}
+=======
+>>>>>>> master
