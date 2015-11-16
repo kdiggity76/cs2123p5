@@ -51,7 +51,6 @@ int main()
     printPriceMenu(ptree);
 
     // Free the tree, quote selection and stdin
-    freeTree(ptree);
     printf("\n");
     return 0;
 }
