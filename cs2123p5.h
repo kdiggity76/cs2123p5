@@ -23,7 +23,7 @@ Purpose:
         Functions provided by groups/individuals
         Functions provided only by groups
         Other functions provided by Larry
-        Utility functions provided by Larry 
+        Utility functions provided by Larry
 Notes:
 
 **********************************************************************/
@@ -51,7 +51,7 @@ Notes:
 #define ERR_COMMAND_LINE    900    // invalid command line argument
 #define ERR_DATA            905    // Bad input data
 
-// exitUsage control 
+// exitUsage control
 #define USAGE_ONLY          0      // user only requested usage information
 #define USAGE_ERR           -1     // usage error, show message and usage information
 
@@ -90,23 +90,23 @@ typedef struct
 {
     NodeT *pRoot;
 } TreeImp;
-typedef TreeImp *Tree;    
+typedef TreeImp *Tree;
 
 // quote selection
 
 // QuoteSelectionItem is the Option and the corresponding
-// quote value (specified as a selection (from 1 to N)).  
+// quote value (specified as a selection (from 1 to N)).
 // The first option value under an option is 1.
 typedef struct
 {
     int    iLevel;                      // Outline level for Options:
-                                        //   Level 0 is for options at 
+                                        //   Level 0 is for options at
                                         //       the root level.
                                         //   Level 1 is for options subordinate
                                         //       to level 0 option values.
                                         //   Level 2 is for options subordinate
                                         //       to level 1 option values.
-    char   szOptionId[MAX_ID_SIZE+1];   // Option ID  (this is not the 
+    char   szOptionId[MAX_ID_SIZE+1];   // Option ID  (this is not the
                                         // ID for an option value)
     int    iSelection;                  // Selection index (relative to 1)
     double  dCost;                      // Cost of this selected item
@@ -143,7 +143,11 @@ void freeTree(Tree tree);
 void insertPriceMenu(Tree tree, Element element, char szParentId[]);
 QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection);
 void deleteItem(Tree tree, char szId[]);
+<<<<<<< HEAD
 //created by Kevin
+=======
+NodeT createNode(char *szID, char cType, double cost, char *szTitle);
+>>>>>>> master
 void printNodes(NodeT *pNode, double *dTotal);
 
 // Driver function to process a input data line.  Groups must write this function

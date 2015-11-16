@@ -31,9 +31,23 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="../cs2123p5.h" />
+		<Unit filename="../cs2123p5Driver.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="../cs2123p5Find_Insert_Delete.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../cs2123p5Print_Free_Quoteez.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../cs2123p5QuoteFull.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../cs2123p5TestDrive.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../p5Input.txt" />
 		<Extensions>
 			<code_completion />
 			<debugger />
