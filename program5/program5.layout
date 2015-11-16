@@ -3,32 +3,37 @@
 	<ActiveTarget name="Debug" />
 	<File name="../p5Input.txt" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1286" topLine="21" />
+			<Cursor1 position="196" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../cs2123p5Driver.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="14684" topLine="87" />
 		</Cursor>
 	</File>
 	<File name="../cs2123p5.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="143" />
+			<Cursor1 position="5621" topLine="120" />
 		</Cursor>
 	</File>
-	<File name="../cs2123p5Find_Insert_Delete.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../cs2123p5TestDrive.c" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="868" topLine="48" />
+			<Cursor1 position="1271" topLine="33" />
 		</Cursor>
 	</File>
 	<File name="../cs2123p5Print_Free_Quoteez.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="257" topLine="0" />
+			<Cursor1 position="413" topLine="24" />
 		</Cursor>
 	</File>
-	<File name="../cs2123p5Driver.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../cs2123p5Find_Insert_Delete.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="948" topLine="45" />
 		</Cursor>
 	</File>
-	<File name="../cs2123p5QuoteFull.c" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../cs2123p5QuoteFull.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="69" topLine="0" />
+			<Cursor1 position="720" topLine="25" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

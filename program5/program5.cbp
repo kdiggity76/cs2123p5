@@ -44,6 +44,9 @@
 		<Unit filename="../cs2123p5QuoteFull.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="../cs2123p5TestDrive.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../p5Input.txt" />
 		<Extensions>
 			<code_completion />

@@ -31,8 +31,11 @@ int main()
     NodeT *pAudio = createNode("BaseAudio", 'O', 0.00, "audio");
     pBase->pChild = pAudio;
 
+    printPriceMenu(Tree tree);
+
     freeSubTree(ptree->pRoot->pChild);
 
+    printPriceMenu(Tree tree);
 
     // Free the tree, quote selection and stdin
     freeTree(ptree);

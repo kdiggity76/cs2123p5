@@ -23,6 +23,13 @@ Notes:
 void printPriceMenu(Tree tree)
 {
 
+   if (tree.pRoot != NULL)
+    {
+      printf("%d", temp->data);
+      preorder(temp->lchild);
+      preorder(temp->rchild);
+    }
+
 
 }
 /******************** printOne *****************************
