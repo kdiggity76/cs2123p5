@@ -44,8 +44,25 @@ Notes:
 **************************************************************************/
 NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
 {
+    if (p==NULL)
+        return NULL;
+    if (pKid == NULL)
+        return NULL;
     
-
+    if (p == pkid)
+    {
+        return pParent;
+    }
+    else
+    {
+        if(p->pChild ==NULL)
+            return findParent(pParent,p->pSibling, pKid);
+        else
+        {
+            pParent = p;
+            return findParent(pParent,p->pChild, pKid);
+        }
+    }
 }
 /******************** insertPriceMenu *****************************
 void insertPriceMenu(Tree tree, Element element, char szParentId[])
