@@ -27,7 +27,7 @@ int main()
     NodeT pB18Eng = createNode("eng18AutBase", 'V', 0.00, "1.8-liter 4 Cyl Automatic");
     NodeT pBColor = createNode("color_base", 'O', 0.00, "Color");
     NodeT pBColorBlue = createNode("bluebase", 'V', 50.00, "Blue");
-    NodeT pBAudio = createNode("audio_base", 'O', 0.00, "audio");
+    NodeT pBAudio = createNode("audio_base", 'O', 0.00, "Audio");
     NodeT pBAudioStd = createNode("audioStdBase", 'V', 0.00, "Audio Std");
     NodeT pWarrenty = createNode("warrenty", 'O', 0.00, "Warrenty");
     NodeT pWarrenty1 = createNode("warrenty1", 'V', 500.00, "40k/3yr");
@@ -46,7 +46,12 @@ int main()
 
     printPriceMenu(ptree);
 
-    printOne(ptree,"bluebase");
+    NodeT *pRoot = ptree->pRoot;
+    NodeT *pParent = NULL;
+    NodeT pKid= pBAudio;
+    pParent = findParent(pParent, pRoot, pKid);
+
+    printf("%s\t\n", pParent->element.szTitle);
 
     printPriceMenu(ptree);
 
