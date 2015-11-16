@@ -46,7 +46,7 @@ NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
 {
     if (p==NULL)
         return NULL;
-    if (pKid == NULL)
+    if (pkid == NULL)
         return NULL;
     
     if (p == pkid)
@@ -56,11 +56,11 @@ NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
     else
     {
         if(p->pChild ==NULL)
-            return findParent(pParent,p->pSibling, pKid);
+            return findParent(pParent,p->pSibling, pkid);
         else
         {
             pParent = p;
-            return findParent(pParent,p->pChild, pKid);
+            return findParent(pParent,p->pChild, pkid);
         }
     }
 }
