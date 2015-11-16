@@ -32,12 +32,18 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="../cs2123p5.h" />
+<<<<<<< HEAD
 		<Unit filename="../cs2123p5Driver.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../cs2123p5Print_Free_Quoteez.c">
 			<Option compilerVar="CC" />
 		</Unit>
+=======
+		<Unit filename="../cs2123p5Print_Free_Quoteez.c">
+			<Option compilerVar="CC" />
+		</Unit>
+>>>>>>> 5d2d7268910b5e1a829aa09eb31ce23f1bbf039d
 		<Unit filename="../cs2123p5QuoteFull.c">
 			<Option compilerVar="CC" />
 		</Unit>
