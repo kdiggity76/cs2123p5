@@ -1,17 +1,4 @@
-<html><head><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
-.en-markup-crop-options {
-    top: 18px !important;
-    left: 50% !important;
-    margin-left: -100px !important;
-    width: 200px !important;
-    border: 2px rgba(255,255,255,.38) solid !important;
-    border-radius: 4px !important;
-}
-
-.en-markup-crop-options div div:first-of-type {
-    margin-left: 0px !important;
-}
-</style></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">/**********************************************************************
+/**********************************************************************
 cs2123p5.h
 Purpose:
     Defines constants:
@@ -156,6 +143,8 @@ void freeTree(Tree tree);
 void insertPriceMenu(Tree tree, Element element, char szParentId[]);
 QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection);
 void deleteItem(Tree tree, char szId[]);
+//created by Kevin
+void printNodes(NodeT *pNode, double *dTotal);
 
 // Driver function to process a input data line.  Groups must write this function
 void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]);
@@ -168,4 +157,3 @@ QuoteSelection newQuoteSelection();
 void ErrExit(int iexitRC, char szFmt[], ...);
 char * getToken(char *pszInputTxt, char szToken[], int iTokenSize);
 void warning(char szFmt[], ...);
-</pre></body></html>
