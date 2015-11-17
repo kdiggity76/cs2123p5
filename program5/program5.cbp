@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="&lt; home/kdiggity/CS2123/program5/cs2123/p5Input.txt" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -42,9 +43,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../cs2123p5QuoteFull.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../cs2123p5TestDrive.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../p5Input.txt" />

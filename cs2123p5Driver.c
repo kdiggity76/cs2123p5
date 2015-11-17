@@ -150,7 +150,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 	//get first token
 	pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 	//If it is a '*' then bail out of function to get next line
-	if(szToken[0] = '*')
+	if(szToken[0] == '*')
 		return;
 
 	if (strcmp(szToken, "DEFINE") == 0){
@@ -225,8 +225,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				//find function inserted here
 
 			//last token should be the title, string copied into element.szTitle
-			memset(pszInput, '\0', sizeof(pszInput));
-			strcpy(pszInput, element.szTitle);
+			strcpy(element.szTitle, pszInput);
 			//once all elements are finished, element is inserted into insertPriceMenu
 			//along with the tree and Parent ID
 			insertPriceMenu(tree, element, szTempParentID);
