@@ -552,7 +552,7 @@ char * getToken(char *pszInputTxt, char szToken[], int iTokenSize)
     // see if we have more characters than target token, if so, trunc
     if (iDelimPos > iTokenSize)
 
-        iCopy = iTokenSize;             // truncated size
+        iCopy = iTokenSize;             //truncated size
     else
         iCopy = iDelimPos;
 

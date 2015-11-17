@@ -95,7 +95,7 @@ void freeSubTree(NodeT *p)
     freeSubTree(p->pChild);
     free (p);
 }
-/******************** freeTree *****************************
+/******************** freeTree ****************************
 void freeTree(Tree tree)
 Purpose:
 Deallocate the tree memory and all of its nodes using freeSubTree to

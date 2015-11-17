@@ -82,7 +82,7 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
 
 
 }
-/******************** deleteItem *****************************
+/******************** deleteItem ****************************
 void deleteItem(Tree tree, char szId[])
 Purpose:
 
