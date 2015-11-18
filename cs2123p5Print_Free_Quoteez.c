@@ -45,6 +45,44 @@ void printNodes(NodeT *pNode, double *dTotal)
     printNodes(pNode->pChild, dTotal);
     printNodes(pNode->pSibling, dTotal);
 }
+/******************** printQuote *****************************
+void printPriceMenu(Tree tree)
+Purpose:
+Print the entire tree in order format. Assigns the first node in the
+tree and then send to a recursive functions. Recusive function traverses
+the tree and prints all the Option nodes and thier corrisponding Option nodes.
+
+Parameters:
+I   NodeT pNode     Placeholder pointer for the root node
+I   double dTotal   Tracks total cost of the order
+
+Notes:
+If empty tree is passed to the function it will do nothing.
+
+**************************************************************************/
+void printQuote(Tree tree)
+{
+    NodeT *pNode;
+    pNode = tree->pRoot;
+    double dTotal = 0;
+    printNodes(pNode, &dTotal);
+    printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
+}
+void printNodes(NodeT *pNode, double *dTotal)
+{
+    if(pNode==NULL)
+        return;
+    if (pNode->element.cNodeType == 'O')
+        {
+            printf("%-8s\t%-26s\t%.2lf\n"
+                ,pNode->element.szTitle
+                ,pNode->pChild->element.szTitle
+                ,pNode->pChild->element.dCost);
+            *dTotal = *dTotal + pNode->pChild->element.dCost;
+        }
+    printNodes(pNode->pChild, dTotal);
+    printNodes(pNode->pSibling, dTotal);
+}
 /******************** printOne *****************************
 void printOne(Tree tree, char szId[])
 Purpose:

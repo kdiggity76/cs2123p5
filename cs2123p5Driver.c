@@ -152,7 +152,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 	//If it is a '*' then bail out of function to get next line
 	if(szToken[0] == '*')
 		return;
-	
+
 	if (strcmp(szToken, "DEFINE") == 0){
 		//DEBUG
 		printf("Token is %s\n", szToken);
@@ -588,8 +588,8 @@ Notes:
 
 
 **************************************************************************/
-QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
-{
+//QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
+//{
 
 
-}
+//}
