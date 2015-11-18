@@ -128,7 +128,7 @@ NodeT *allocateNodeT(Element value)
 {
     NodeT *pNew = (NodeT *) malloc(sizeof(NodeT));
     pNew->element = value;
-    pNew-pLeft = NULL;
-    pNew->pRight = NULL;
+    pNew->pChild = NULL;
+    pNew->pSibling = NULL;
     return pNew;
 }

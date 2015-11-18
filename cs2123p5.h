@@ -148,6 +148,7 @@ void deleteItem(Tree tree, char szId[]);
 NodeT createNode(char *szID, char cType, double cost, char *szTitle);
 void printNodes(NodeT *pNode, double *dTotal);
 NodeT *allocateNodeT(Element value);
+void insertChild(NodeT *pNode, NodeT *tempNode);
 
 // Driver function to process a input data line.  Groups must write this function
 void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]);

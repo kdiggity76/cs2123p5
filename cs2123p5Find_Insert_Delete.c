@@ -79,8 +79,30 @@ Notes:
 **************************************************************************/
 void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
-
-
+    NodeT *pNode;
+    NodeT *pParent;
+    pNode = allocateNodeT(element);
+    if(tree->pRoot == NULL)
+    {
+        tree->pRoot = pNode;
+        return;
+    }
+    pParent = findId(tree->pRoot, szParentId);
+    insertChild(pNode, pParent->pChild);
+}
+void insertChild(NodeT *pNode, NodeT *tempNode)
+{
+     if(tempNode == NULL)
+     {
+     tempNode = pNode;
+        return;
+     }
+    if (tempNode->pSibling == NULL)
+    {
+        tempNode->pSibling = pNode;
+        return;
+    }
+    else insertChild(pNode, tempNode->pSibling);
 }
 /******************** deleteItem ****************************
 void deleteItem(Tree tree, char szId[])
