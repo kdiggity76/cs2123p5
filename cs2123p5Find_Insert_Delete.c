@@ -26,8 +26,8 @@ NodeT *findId(NodeT *p, char szId[])
         return NULL;
     if (strcmp(szId, p->element.szId)==0)
         return p;
-    p = findId(p->pChild, szId);
-    p = findId(p->pSibling, szId);
+    return findId(p->pChild, szId);
+    return findId(p->pSibling, szId);
 }
 /******************** findParent *****************************
 NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
@@ -44,24 +44,18 @@ Notes:
 **************************************************************************/
 NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
 {
+
     if (p==NULL)
         return NULL;
     if (pkid == NULL)
         return NULL;
 
     if (p == pkid)
-    {
         return pParent;
-    }
     else
     {
-        if(p->pChild ==NULL)
-            return findParent(pParent,p->pSibling, pkid);
-        else
-        {
-            pParent = p;
-            return findParent(pParent,p->pChild, pkid);
-        }
+        return findParent(p, p->pChild, pkid);
+        return findParent(pParent, p->pSibling, pkid);
     }
 }
 /******************** insertPriceMenu *****************************
@@ -87,8 +81,16 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
         tree->pRoot = pNode;
         return;
     }
+    if(strcmp(szParentId, "ROOT")==0)
+    {
+    pParent = tree->pRoot;
+    insertChild(pNode, pParent->pSibling);
+    }
+    else
+    {
     pParent = findId(tree->pRoot, szParentId);
     insertChild(pNode, pParent->pChild);
+    }
 }
 void insertChild(NodeT *pNode, NodeT *tempNode)
 {
