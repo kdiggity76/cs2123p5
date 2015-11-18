@@ -81,9 +81,7 @@ Parameters:
 I   NodeT p     Starting node to be freed
 
 Notes:
-
-
-
+n/a
 **************************************************************************/
 void freeSubTree(NodeT *p)
 {
@@ -102,12 +100,9 @@ Deallocate the tree memory and all of its nodes using freeSubTree to
 deallocate the nodes.
 
 Parameters:
-
-
+n/a
 Notes:
-
-
-
+n/a
 **************************************************************************/
 void freeTree(Tree tree)
 {
@@ -117,4 +112,23 @@ void freeTree(Tree tree)
     //deallocates all nodes
     freeSubTree(tree->pRoot);
     free (tree);
+}
+/******************** allocateNodeT ****************************
+NodeT *allocateNodeT(Element value)
+Purpose:
+Create memory allocation for node to be inserted.
+
+Parameters:
+I   NodeT pNew  New node pointer to be inserted into tree
+
+Notes:
+n/a
+**************************************************************************/
+NodeT *allocateNodeT(Element value)
+{
+    NodeT *pNew = (NodeT *) malloc(sizeof(NodeT));
+    pNew->element = value;
+    pNew-pLeft = NULL;
+    pNew->pRight = NULL;
+    return pNew;
 }
