@@ -73,8 +73,20 @@ Notes:
 **************************************************************************/
 void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
+    NodeT *pNew;
     
-
+    if (tree->pRoot == NULL)
+        pNew = allocateNodeT();
+    
+    if(strcmp(szParentId, element.szId) == 0)
+    {
+        pNew = allocateNodeT();
+        
+    }
+    else
+    {
+        insertPriceMenu(tree, element, szParentId)
+    }
 }
 /******************** deleteItem *****************************
 void deleteItem(Tree tree, char szId[])
