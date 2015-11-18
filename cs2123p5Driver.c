@@ -127,8 +127,9 @@ int main()
 // Driver function to process a input data line.  Groups must write this function
 void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 
-	//Tree node for traversing tree in functions needing a traversal pointer
-	NodeT pTreeNode;
+	//Tree node for referencing tree information
+	//such as for QUOTE OPTION information
+	NodeT *pTreeNode;
 	//token type for getToken
 	Token szToken;
 
@@ -142,8 +143,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 		char   cCostInd;              // Y - it has a cost, N - it does not have a cost
 		double dCost;
 	*/
-	//stores the return code from determineQuote() for return code switch case
-	int iQuoteCode;
+
 	char *pszInput, szTempParentID[MAX_ID_SIZE + 1];
 	//pszInput starts at szInputBuffer
 	pszInput = szInputBuffer;
@@ -152,8 +152,10 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 	//If it is a '*' then bail out of function to get next line
 	if(szToken[0] == '*')
 		return;
-
+	
 	if (strcmp(szToken, "DEFINE") == 0){
+		//DEBUG
+		printf("Token is %s\n", szToken);
 		//get next token in buffer
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 
@@ -234,47 +236,52 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 
 
 	}else if(strcmp(szToken, "PRINT") == 0){
-
-
+		//get token after PRINT, either ONE or ALL
+		//DEBUG
+		printf("Token is now %s\n", szToken);
+		//DEBUG
+		printf("pszInput is %s\n", pszInput);
+		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+		//DEBUG
+		printf("Token after PRINT is %s\n", szToken);
 		if(strcmp(szToken, "ONE") == 0){
 				//get next token in buffer, which is the ID of the node to print
 				pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+				//DEBUG
+				printf("Token after ONE is %s, Entering printOne() function\n", szToken);
 	                	printOne(tree, szToken);
-		}else if(strcmp(szToken, "ALL") == 0)
+		}else if(strcmp(szToken, "ALL") == 0){
 				//entire price menu is printed
+				//DEBUG
+				printf("Entering printPriceMenu...\n");
 				printPriceMenu(tree);
-		else
+		}else
 			printf("ERROR: PRINT definition is not ONE or ALL...\n");
 
 	}else if(strcmp(szToken, "QUOTE") == 0){
 		//get next token in buffer
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 
-		//Might move quote begin, option, and end outside of the driver function altogether...
-		//Might be a loop
-		/*Ex if(strcmp(Token, "QUOTE") == 0)
-			//next token should be Begin
-			getToken()
-			//getting next buffer line should be an QUOTE OPTION line
-			fgets(szInputBuffer, MAX_LINE_SIZE, stdin)
-
-			while(strcmp(Token, "END" != 0)
-			{
-
-				getToken() until line is clear
-				getToken()
-				//get next line
-				fgets(szInputBuffer, MAX_LINE_SIZE, stdin)
-			}
-			//when while ends with QUOTE END
-			determineQuote(tree, quote);
-
-		*/
-
 		if (strcmp(szToken, "BEGIN") == 0){
-			//do something with "BEGIN"
+			//set Quote Selection item count to zero for new quote
+			quote->iQuoteItemCnt = 0;
 		}else if (strcmp(szToken, "OPTION") == 0){
-			//do something with "OPTION"
+			//Insert the Option traits into the Quote Selection Struct
+			//first token after QUOTE OPTION should be iLevel
+			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+			//assign the Level to quoteItem
+			quote->quoteItemM[quote->iQuoteItemCnt].iLevel = atoi(szToken);
+			//second token is the OptionID
+			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+			//find the ID in the tree to make sure it exists
+			pTreeNode = findId(pTreeNode, szToken);
+			//the cost from the retrieved node is assigned as well
+			quote->quoteItemM[quote->iQuoteItemCnt].dCost = pTreeNode->element.dCost;
+			//last token for QUOTE OPTION is the Selection ID
+			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
+			quote->quoteItemM[quote->iQuoteItemCnt].iSelection = atoi(szToken);
+			//increment Quote Selection item count
+			quote->iQuoteItemCnt++;
 		}else if(strcmp(szToken, "END") == 0){
 			//take options and compile the quote
 			//quote inserted from QuoteSelection at beginning of function
@@ -285,8 +292,9 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				* error, or option selection error.
 				* For total cost and partial cost, it should also print those totals.
 			*/
-			iQuoteCode = determineQuote(tree, quote).returnCode;
-			switch (iQuoteCode)
+			//DEBUG
+			printf("Initializing determineQuote() function\n");
+			switch (determineQuote(tree, quote).returnCode)
 			{
 				case QUOTE_NORMAL:
 					printf("Full quote COMPLETE.\n");
@@ -302,16 +310,16 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				break;
 
 				case QUOTE_BAD_OPTION:
-					ErrExit(QUOTE_BAD_OPTION, "Option error: %d\n", iQuoteCode);
+					ErrExit(QUOTE_BAD_OPTION, "Option error: %d\n", determineQuote(tree, quote).returnCode);
 				break;
 
 				case QUOTE_BAD_SELECTION:
-					ErrExit(QUOTE_BAD_SELECTION, "Selection error: %d\n", iQuoteCode);
+					ErrExit(QUOTE_BAD_SELECTION, "Selection error: %d\n", determineQuote(tree, quote).returnCode);
 				break;
 
 				default:
 				printf("ERROR: Unknown error code returned by determineQuote.\n");
-				ErrExit(ERR_ALGORITHM, "Unknown event type: %d\n", iQuoteCode);
+				ErrExit(ERR_ALGORITHM, "Unknown event type: %d\n", determineQuote(tree, quote).returnCode);
 			}
 
 
@@ -565,4 +573,23 @@ char * getToken(char *pszInputTxt, char szToken[], int iTokenSize)
         return pszInputTxt;
     else
         return pszInputTxt + 1;
+}
+
+/******************** QuoteResult *****************************
+QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
+Purpose:
+
+
+Parameters:
+
+
+Notes:
+
+
+
+**************************************************************************/
+QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
+{
+
+
 }
