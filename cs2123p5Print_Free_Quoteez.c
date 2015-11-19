@@ -140,7 +140,7 @@ n/a
 **************************************************************************/
 void freeTree(Tree tree)
 {
-    //do nothing if passed a non-existant tree
+    //do nothing if passed a NULL tree
     if (tree == NULL)
         return;
     //deallocates all nodes
