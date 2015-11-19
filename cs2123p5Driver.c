@@ -149,9 +149,6 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 	pszInput = szInputBuffer;
 	//get first token
 	pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
-	//If it is a '*' then bail out of function to get next line
-	if(szToken[0] == '*')
-		return;
 
 	if (strcmp(szToken, "DEFINE") == 0){
 		//DEBUG
@@ -187,9 +184,13 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			//next token is the positive or negative cost
 			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 			element.dCost = atof(szToken);
+			
 			//last token should be the title, string copied into element.szTitle
+			memset(element.szTitle, '\0', sizeof(element.szTitle));
+			//using strtok(), which is a native C function that makes use of
+			//delimitters similar to getToken to edit strings
+			pszInput = strtok(pszInput, "\n");
 			strcpy(element.szTitle, pszInput);
-
 			//once all elements are finished, element is inserted into insertPriceMenu
 			//along with the tre and Parent ID
 
@@ -223,6 +224,10 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				//find function inserted here
 
 			//last token should be the title, string copied into element.szTitle
+			memset(element.szTitle, '\0', sizeof(element.szTitle));
+			//using strtok(), which is a native C function that makes use of
+			//delimitters similar to getToken to edit strings
+			pszInput = strtok(pszInput, "\n");
 			strcpy(element.szTitle, pszInput);
 			//once all elements are finished, element is inserted into insertPriceMenu
 			//along with the tree and Parent ID
