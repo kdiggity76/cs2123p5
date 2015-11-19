@@ -24,7 +24,7 @@ If empty tree is passed to the function it will do nothing.
 **************************************************************************/
 void printPriceMenu(Tree tree)
 {
-    printf("PRINT ALL\n");
+    printf("Price Menu:\n");
     NodeT *pNode;
     pNode = tree->pRoot;
     printNodes(pNode);
@@ -34,9 +34,10 @@ void printNodes(NodeT *pNode)
 {
     if(pNode==NULL)
         return;
+    printf("%s"
+            ,pNode->element.szTitle);
     if (pNode->element.cNodeType == 'O')
-            printf("%s (Option)\t"
-                ,pNode->element.szTitle);
+            printf("(Option)\t");
     if (pNode->pChild != NULL)
             printf("%s\t%.2lf\n"
                 ,pNode->pChild->element.szTitle
