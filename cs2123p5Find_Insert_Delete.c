@@ -75,37 +75,25 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
     NodeT *pNode;
     NodeT *pParent;
-    pNode = allocateNodeT(element);
-    if(tree->pRoot == NULL)
+    pParent = findId(tree->pRoot, szParentId);
+    if(pParent == NULL)
     {
-        tree->pRoot = pNode;
+        insertIntoSibling(&tree->pRoot, element);
         return;
-    }
-    if(strcmp(szParentId, "ROOT")==0)
-    {
-    pParent = tree->pRoot;
-    insertChild(pNode, pParent->pSibling);
     }
     else
     {
-    pParent = findId(tree->pRoot, szParentId);
-    insertChild(pNode, pParent->pChild);
+        insertIntoChild(&pParent->pChild, element);
     }
 }
-void insertChild(NodeT *pNode, NodeT *tempNode)
+void insertIntoChild(NodeT **pp, Element element)
 {
-     if(tempNode == NULL)
-     {
-     tempNode = pNode;
-        return;
-     }
-    if (tempNode->pSibling == NULL)
-    {
-        tempNode->pSibling = pNode;
-        return;
-    }
-    else insertChild(pNode, tempNode->pSibling);
+    if(*pp == NULL)
+        *pp = allocateNodeT(element);
+    else
+        insertIntoSibling(&((*pp)->pChild), element);
 }
+
 /******************** deleteItem ****************************
 void deleteItem(Tree tree, char szId[])
 Purpose:
@@ -123,4 +111,24 @@ void deleteItem(Tree tree, char szId[])
 {
 
 
+}
+/******************** insertIntoSibling *****************************
+ void insertIntoSibling(NodeT **pp, Element element)
+ Purpose:
+
+
+ Parameters:
+
+
+ Notes:
+
+
+
+ **************************************************************************/
+void insertIntoSibling(NodeT **pp, Element element)
+{
+    if(*pp == NULL)
+        *pp = allocateNodeT(element);
+    else
+        insertIntoSibling(&((*pp)->pSibling), element);
 }

@@ -24,26 +24,26 @@ If empty tree is passed to the function it will do nothing.
 **************************************************************************/
 void printPriceMenu(Tree tree)
 {
+    printf("PRINT ALL\n");
     NodeT *pNode;
     pNode = tree->pRoot;
-    double dTotal = 0;
-    printNodes(pNode, &dTotal);
-    printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
+    printNodes(pNode);
+    printf("\n");
 }
-void printNodes(NodeT *pNode, double *dTotal)
+void printNodes(NodeT *pNode)
 {
     if(pNode==NULL)
         return;
     if (pNode->element.cNodeType == 'O')
-        {
-            printf("%-8s\t%-26s\t%.2lf\n"
-                ,pNode->element.szTitle
+            printf("%s (Option)\t"
+                ,pNode->element.szTitle);
+    if (pNode->pChild != NULL)
+            printf("%s\t%.2lf\n"
                 ,pNode->pChild->element.szTitle
                 ,pNode->pChild->element.dCost);
-            *dTotal = *dTotal + pNode->pChild->element.dCost;
-        }
-    printNodes(pNode->pChild, dTotal);
-    printNodes(pNode->pSibling, dTotal);
+
+    printNodes(pNode->pChild);
+    printNodes(pNode->pSibling);
 }
 /******************** printQuote *****************************
 void printPriceMenu(Tree tree)
@@ -60,29 +60,24 @@ Notes:
 If empty tree is passed to the function it will do nothing.
 
 **************************************************************************/
-void printQuote(Tree tree)
-{
-    NodeT *pNode;
-    pNode = tree->pRoot;
-    double dTotal = 0;
-    printNodes(pNode, &dTotal);
-    printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
-}
-void printNodes(NodeT *pNode, double *dTotal)
-{
-    if(pNode==NULL)
-        return;
-    if (pNode->element.cNodeType == 'O')
-        {
-            printf("%-8s\t%-26s\t%.2lf\n"
-                ,pNode->element.szTitle
-                ,pNode->pChild->element.szTitle
-                ,pNode->pChild->element.dCost);
-            *dTotal = *dTotal + pNode->pChild->element.dCost;
-        }
-    printNodes(pNode->pChild, dTotal);
-    printNodes(pNode->pSibling, dTotal);
-}
+//void printQuote(NodeT pNode)
+//{
+//    double dTotal = 0;
+//    printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
+//.
+//    if(pNode==NULL)
+//        return;
+//    if (pNode->element.cNodeType == 'O')
+//        {
+//            printf("%-8s\t%-26s\t%.2lf\n"
+//                ,pNode->element.szTitle
+//                ,pNode->pChild->element.szTitle
+//                ,pNode->pChild->element.dCost);
+//            *dTotal = *dTotal + pNode->pChild->element.dCost;
+//        }
+//    printNodes(pNode->pChild);
+//    printNodes(pNode->pSibling);
+//}
 /******************** printOne *****************************
 void printOne(Tree tree, char szId[])
 Purpose:

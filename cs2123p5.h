@@ -143,13 +143,14 @@ void freeTree(Tree tree);
 void insertPriceMenu(Tree tree, Element element, char szParentId[]);
 QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection);
 void deleteItem(Tree tree, char szId[]);
+void insertIntoSibling(NodeT **pp, Element element);
 
 //created by Kevin
 NodeT createNode(char *szID, char cType, double cost, char *szTitle);
-void printNodes(NodeT *pNode, double *dTotal);
+void printNodes(NodeT *pNode);
 NodeT *allocateNodeT(Element value);
-void insertChild(NodeT *pNode, NodeT *tempNode);
-void printQuote(Tree tree);
+void insertIntoChild(NodeT **pp, Element element);
+void printQuote(NodeT pNode);
 
 // Driver function to process a input data line.  Groups must write this function
 void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]);

@@ -155,7 +155,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 
 	if (strcmp(szToken, "DEFINE") == 0){
 		//DEBUG
-		printf("Token is %s\n", szToken);
+		//printf("Token is %s\n", szToken);
 		//get next token in buffer
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 
@@ -238,22 +238,22 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 	}else if(strcmp(szToken, "PRINT") == 0){
 		//get token after PRINT, either ONE or ALL
 		//DEBUG
-		printf("Token is now %s\n", szToken);
+		//printf("Token is now %s\n", szToken);
 		//DEBUG
-		printf("pszInput is %s\n", pszInput);
+		//printf("pszInput is %s\n", pszInput);
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 		//DEBUG
-		printf("Token after PRINT is %s\n", szToken);
+		//printf("Token after PRINT is %s\n", szToken);
 		if(strcmp(szToken, "ONE") == 0){
 				//get next token in buffer, which is the ID of the node to print
 				pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 				//DEBUG
-				printf("Token after ONE is %s, Entering printOne() function\n", szToken);
+				//printf("Token after ONE is %s, Entering printOne() function\n", szToken);
 	                	printOne(tree, szToken);
 		}else if(strcmp(szToken, "ALL") == 0){
 				//entire price menu is printed
 				//DEBUG
-				printf("Entering printPriceMenu...\n");
+				//printf("Entering printPriceMenu...\n");
 				printPriceMenu(tree);
 		}else
 			printf("ERROR: PRINT definition is not ONE or ALL...\n");
