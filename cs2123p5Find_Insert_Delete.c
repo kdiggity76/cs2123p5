@@ -82,7 +82,7 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
     if (pParent->pChild == NULL)
         pParent->pChild = pKid;
     else
-        insertIntoSibling((&pParent->pChild), element)
+        insertIntoSibling(&(pParent->pChild), element)
 }
 /******************** deleteItem *****************************
 void deleteItem(Tree tree, char szId[])
