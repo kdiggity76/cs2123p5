@@ -181,10 +181,6 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			memset(szTempParentID, '\0', sizeof(szTempParentID));
    			strcpy(szTempParentID, szToken);
 
-			//check that the parent ID actually exists...
-			//might need to use "&element.szId, etc" instead of "element.szId"
-			//findParent(NodeT *pParent, NodeT *p, NodeT *pkid);
-
 			//next token is the cost indicator
 			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 			element.cCostInd = szToken[0];
@@ -192,11 +188,11 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 			element.dCost = atof(szToken);
 			//last token should be the title, string copied into element.szTitle
-			memset(pszInput, '\0', sizeof(pszInput));
-			strcpy(pszInput, element.szTitle);
+			strcpy(element.szTitle, pszInput);
 
 			//once all elements are finished, element is inserted into insertPriceMenu
 			//along with the tre and Parent ID
+
 			insertPriceMenu(tree, element, szTempParentID);
 
 			//possibly reset all element string values to '\0' to prevent old data being passed to new nodes?f
@@ -257,8 +253,8 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				printPriceMenu(tree);
 		}else
 			printf("ERROR: PRINT definition is not ONE or ALL...\n");
-
-	}else if(strcmp(szToken, "QUOTE") == 0){
+////////////QUOTE AND DELETE COMMENTED OUT UNTIL 5.2 IS COMPLETE/////
+/*	}else if(strcmp(szToken, "QUOTE") == 0){
 		//get next token in buffer
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 
@@ -293,7 +289,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				* For total cost and partial cost, it should also print those totals.
 			*/
 			//DEBUG
-			printf("Initializing determineQuote() function\n");
+			/*printf("Initializing determineQuote() function\n");
 			switch (determineQuote(tree, quote).returnCode)
 			{
 				case QUOTE_NORMAL:
@@ -329,11 +325,12 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 	}else if(strcmp(szToken, "DELETE") == 0){
 		/* deletes one item (and its pChild children )from the tree.
 		It should not delete its siblings.  The deleted nodes
-		must be freed.  This is used from the DELETE command. */
+		must be freed.  This is used from the DELETE command. //Move '/*' comment back to here after 5.2.
 		//get next token in buffer, which is the ID of the node to delete
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 		deleteItem(tree, szToken);
-
+*/
+////////////QUOTE AND DELETE COMMENTED OUT UNTIL 5.2 IS COMPLETE/////
 	//not supposed to reach this level
 	}else{
 		printf("Data was not read correctly, revise code for better error handling.\n");
