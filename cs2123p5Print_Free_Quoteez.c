@@ -105,9 +105,11 @@ void printOne(Tree tree, char szId[])
     pNode = findId(pNode, szId);
         if(pNode != NULL)
         {
-            printf("%-8s\t%-26s\t%.2lf\n"
+            printf("Title: %-8s\nID: %-8\nType: %c\nCostInd: %c\nCost: %.2lf\n"
                     ,pNode->element.szTitle
-                    ,pNode->element.szTitle
+                    ,pNode->element.szId
+                    ,pNode->element.cNodeType
+                    ,pNode->element.cCostInd
                     ,pNode->element.dCost);
         }
 }

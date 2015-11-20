@@ -44,12 +44,12 @@ Notes:
 **************************************************************************/
 NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
 {
-    
+
     if (p==NULL)
         return NULL;
     if (pkid == NULL)
         return NULL;
-    
+
     if (p == pkid)
         return pParent;
     else
@@ -75,10 +75,10 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
     NodeT *pKid;
     NodeT *pParent;
-    
+
     pKid = findId(tree->pRoot, element.szId);
     pParent = findId(tree->pRoot, szParentId);
-    
+
     if (pKid != NULL)
     {
         printf("\tWarning: Id Already in Tree\n");
@@ -87,9 +87,8 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
     if(pParent == NULL)
     {
         printf("\tWarning: Parent Not Found\n");
-        return;
     }
-        
+
     if (pParent->pChild == NULL)
         pParent->pChild = pKid;
     else
@@ -116,15 +115,15 @@ void deleteItem(Tree tree, char szId[])
 /******************** insertIntoSibling *****************************
  void insertIntoSibling(NodeT **pp, Element element)
  Purpose:
- 
- 
+
+
  Parameters:
- 
- 
+
+
  Notes:
- 
- 
- 
+
+
+
  **************************************************************************/
 void insertIntoSibling(NodeT **pp, Element element)
 {
