@@ -34,17 +34,22 @@ void printNodes(NodeT *pNode)
 {
     if(pNode==NULL)
         return;
-    printf("%s"
-            ,pNode->element.szTitle);
-    if (pNode->element.cNodeType == 'O')
-            printf("(Option)\t");
-    if (pNode->pChild != NULL)
-            printf("%s\t%.2lf\n"
-                ,pNode->pChild->element.szTitle
-                ,pNode->pChild->element.dCost);
 
+    if (pNode->element.cNodeType == 'O')
+    {
+        printf("%-9s"
+            ,pNode->element.szTitle);
+        printf("(Option) ");
+    }
+    if (pNode->element.cNodeType == 'V')
+            printf("%-10s\t$%.2lf "
+                ,pNode->element.szTitle
+                ,pNode->element.dCost);
+    if(pNode->pChild == NULL)
+        printf("\n");
     printNodes(pNode->pChild);
     printNodes(pNode->pSibling);
+
 }
 /******************** printQuote *****************************
 void printPriceMenu(Tree tree)
