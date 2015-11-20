@@ -44,12 +44,12 @@ Notes:
 **************************************************************************/
 NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
 {
-
+    
     if (p==NULL)
         return NULL;
     if (pkid == NULL)
         return NULL;
-
+    
     if (p == pkid)
         return pParent;
     else
@@ -73,28 +73,29 @@ Notes:
 **************************************************************************/
 void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
-    NodeT *pNode;
+    NodeT *pKid;
     NodeT *pParent;
+    
+    pKid = findId(tree->pRoot, element.szId);
     pParent = findId(tree->pRoot, szParentId);
-    if(pParent == NULL)
+    
+    if (pKid != NULL)
     {
-        insertIntoSibling(&tree->pRoot, element);
+        printf("\tWarning: Id Already in Tree\n");
         return;
     }
-    else
+    if(pParent == NULL)
     {
-        insertIntoChild(&pParent->pChild, element);
+        printf("\tWarning: Parent Not Found\n");
+        return;
     }
-}
-void insertIntoChild(NodeT **pp, Element element)
-{
-    if(*pp == NULL)
-        *pp = allocateNodeT(element);
+        
+    if (pParent->pChild == NULL)
+        pParent->pChild = pKid;
     else
-        insertIntoSibling(&((*pp)->pChild), element);
+        insertIntoSibling(&(pParent->pChild), element);
 }
-
-/******************** deleteItem ****************************
+/******************** deleteItem *****************************
 void deleteItem(Tree tree, char szId[])
 Purpose:
 
@@ -115,15 +116,15 @@ void deleteItem(Tree tree, char szId[])
 /******************** insertIntoSibling *****************************
  void insertIntoSibling(NodeT **pp, Element element)
  Purpose:
-
-
+ 
+ 
  Parameters:
-
-
+ 
+ 
  Notes:
-
-
-
+ 
+ 
+ 
  **************************************************************************/
 void insertIntoSibling(NodeT **pp, Element element)
 {
@@ -132,3 +133,10 @@ void insertIntoSibling(NodeT **pp, Element element)
     else
         insertIntoSibling(&((*pp)->pSibling), element);
 }
+
+
+
+
+
+
+
