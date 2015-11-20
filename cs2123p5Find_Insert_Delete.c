@@ -79,6 +79,17 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
     pkid = findId(tree->pRoot, element->szId);
     pParent = findId(tree->pRoot, szParentId);
     
+    if (pkid != NULL)
+    {
+        printf("\tWarning: Id Already in Tree\n");
+        break;
+    }
+    if(pParent == NULL)
+    {
+        printf("\tWarning: Parent Not Found\n");
+        break;
+    }
+        
     if (pParent->pChild == NULL)
         pParent->pChild = pKid;
     else
