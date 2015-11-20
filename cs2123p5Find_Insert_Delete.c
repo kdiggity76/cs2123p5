@@ -73,24 +73,25 @@ Notes:
 **************************************************************************/
 void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
-    NodeT pkid;
-    NodeT pParent;
+    NodeT *pkid;
+    NodeT *pParent;
     
-    pkid = findId(tree->pRoot, element->szId);
-    pParent = findId(tree->pRoot, szParentId);
-    
+    pkid = findId(tree->pRoot, element.szId);
     if (pkid != NULL)
     {
         printf("\tWarning: Id Already in Tree\n");
-        break;
+        return;
     }
-    /*
-    if(pParent == NULL)
+    if (tree->pRoot == NULL)
     {
-        printf("\tWarning: Parent Not Found\n");
-        break;
+        tree->pRoot =insertIntoChild(&pkid, element);
+        return;
     }
-      */
+    if(szParentId == NULL)
+        return;
+    else
+        pParent = findId(tree->pRoot, szParentId);
+    
     if (pParent->pChild == NULL)
         pParent->pChild = insertIntoChild(&pkid, element);
     else
@@ -135,7 +136,7 @@ void insertIntoSibling(NodeT **pp, Element element)
         insertIntoSibling(&((*pp)->pSibling), element);
 }
 
-NodeT insertIntoChild(NodeT **pp, Element element)
+NodeT *insertIntoChild(NodeT **pp, Element element)
 {
     if(*pp == NULL)
     {
