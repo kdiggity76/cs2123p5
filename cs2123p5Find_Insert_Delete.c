@@ -88,7 +88,11 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
     {
         pParent = findId(tree->pRoot, szParentId);
         if pParent == NULL)
-            error;
+        {
+            printf("\tParent Not Found\n");
+            return;
+            //ErrExit(ERR_ALGORITHM, "Parent Not Found",...);
+        }
         insertIntoSibling(&(pParent->pChild), element);
     }
 }
