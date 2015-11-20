@@ -11,7 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="&lt; home/kdiggity/CS2123/program5/cs2123/p5Input.txt" />
+				<Option parameters="&lt; /home/kdiggity/CS2123/program5/cs2123p5/p5Input.txt" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
