@@ -82,20 +82,15 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
         printf("\tWarning: Id Already in Tree\n");
         return;
     }
-    if (tree->pRoot == NULL)
+    if (strcmp(szParentId, "ROOT") ==0)
+        insertIntoSibling(&(tree->pRoot, element));
+    else
     {
-        tree->pRoot =insertIntoChild(&pkid, element);
-        return;
-    }
-    if(szParentId == NULL)
-        return;
-    else
         pParent = findId(tree->pRoot, szParentId);
-    
-    if (pParent->pChild == NULL)
-        pParent->pChild = insertIntoChild(&pkid, element);
-    else
+        if pParent == NULL)
+            error;
         insertIntoSibling(&(pParent->pChild), element);
+    }
 }
 /******************** deleteItem *****************************
 void deleteItem(Tree tree, char szId[])
@@ -136,14 +131,6 @@ void insertIntoSibling(NodeT **pp, Element element)
         insertIntoSibling(&((*pp)->pSibling), element);
 }
 
-NodeT *insertIntoChild(NodeT **pp, Element element)
-{
-    if(*pp == NULL)
-    {
-        *pp = allocateNodeT(element);
-        return *pp;
-    }
-}
 
 
 
