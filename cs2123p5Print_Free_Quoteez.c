@@ -34,7 +34,7 @@ void printNodes(NodeT *pNode)
 {
     if(pNode==NULL)
         return;
-
+        printf("\t\t");
     if (pNode->element.cNodeType == 'O')
     {
         printf("%-9s"
@@ -47,6 +47,7 @@ void printNodes(NodeT *pNode)
                 ,pNode->element.dCost);
     if(pNode->pChild == NULL)
         printf("\n");
+
     printNodes(pNode->pChild);
     printNodes(pNode->pSibling);
 

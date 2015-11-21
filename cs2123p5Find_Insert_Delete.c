@@ -23,11 +23,12 @@ Notes:
 NodeT *findId(NodeT *p, char szId[])
 {
         if (p == NULL)
-                return;
+            return;
         if (strcmp(p->element.szId, szId) == 0)
-                return p;
+            return p;
         if (p->pChild != NULL)
-               return findId(p->pChild, szId);
+            return findId(p->pChild, szId);
+
         return findId(p->pSibling, szId);
 }
 /******************** findParent *****************************
