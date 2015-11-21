@@ -23,7 +23,7 @@ Notes:
 QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
 {
     QuoteResult *newQuote;
-    NodeT *kid, 
+    NodeT *kid;
     NodeT *kkid;
     int i,k;
     double total = 0;
@@ -41,7 +41,7 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
             else
               kkid = kkid->pSibling;
           }
-          printf("%-7s %\n",
-          kid->element.szTitle);
+          printf("%-7s %\n"
+                , kid->element.szTitle);
       }
 }

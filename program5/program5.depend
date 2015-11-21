@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1448075471 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Driver.c
+1448144638 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Driver.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
@@ -8,7 +8,7 @@
 
 1447991314 /home/kdiggity/CS2123/program5/cs2123p5/cs2123p5.h
 
-1448079796 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Find_Insert_Delete.c
+1448146299 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Find_Insert_Delete.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
@@ -22,7 +22,7 @@
 	<stdlib.h>
 	"cs2123p5.h"
 
-1447906087 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5QuoteFull.c
+1448145986 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5QuoteFull.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
