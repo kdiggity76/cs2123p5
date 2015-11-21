@@ -182,7 +182,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			//next token is the positive or negative cost
 			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 			element.dCost = atof(szToken);
-			
+
 			//last token should be the title, string copied into element.szTitle
 			memset(element.szTitle, '\0', sizeof(element.szTitle));
 			//using strtok(), which is a native C function that makes use of
@@ -190,16 +190,16 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			pszInput = strtok(pszInput, "\n");
 			strcpy(element.szTitle, pszInput);
 			pTreeNode = findId(tree->pRoot, szTempParentID);
-			if(pTreeNode == NULL){
-				printf("ERROR: Parent ID does not exist.\n");
-				return;
-			}
+			//if(pTreeNode == NULL){
+				//printf("ERROR: Parent ID does not exist.\n");
+				//return;
+			//}
 			pTreeNode = findId(tree->pRoot, element.szId);
-			if(pTreeNode != NULL){
-				printf("ERROR: Node ID already exists in tree.\n");
-				return;
+			//if(pTreeNode != NULL){
+				//printf("ERROR: Node ID already exists in tree.\n");
+				//return;
 
-			}
+			//}
 			//once all elements are finished, element is inserted into insertPriceMenu
 			//along with the tre and Parent ID
 			insertPriceMenu(tree, element, szTempParentID);
@@ -236,20 +236,20 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			strcpy(element.szTitle, pszInput);
 			//Error checking
 			pTreeNode = findId(tree->pRoot, szTempParentID);
-			if(pTreeNode == NULL){
-				printf("ERROR: Parent ID does not exist.\n");
-				return;
-			}
+			//if(pTreeNode == NULL){
+				//printf("ERROR: Parent ID does not exist.\n");
+				//return;
+			//}
 			pTreeNode = findId(tree->pRoot, element.szId);
-			if(pTreeNode != NULL){
-				printf("ERROR: Node ID already exists in tree.\n");
-				return;
+			//if(pTreeNode != NULL){
+				//printf("ERROR: Node ID already exists in tree.\n");
+				//return;
 
-			}
+			//}
 			//once all elements are finished, element is inserted into insertPriceMenu
 			//along with the tree and Parent ID
 			insertPriceMenu(tree, element, szTempParentID);
-			
+
 		}else
 			printf("ERROR: DEFINE definition is not OPTION or VALUE...\n");
 

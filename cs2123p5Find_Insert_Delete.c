@@ -22,12 +22,13 @@ Notes:
 **************************************************************************/
 NodeT *findId(NodeT *p, char szId[])
 {
-    if (p == NULL)
-        return NULL;
-    if (strcmp(szId, p->element.szId)==0)
-        return p;
-    return findId(p->pChild, szId);
-    return findId(p->pSibling, szId);
+        if (p == NULL)
+                return;
+        if (strcmp(p->element.szId, szId) == 0)
+                return p;
+        if (p->pChild != NULL)
+               return findId(p->pChild, szId);
+        return findId(p->pSibling, szId);
 }
 /******************** findParent *****************************
 NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
@@ -73,26 +74,28 @@ Notes:
 **************************************************************************/
 void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
-    NodeT *pKid;
+    NodeT *pkid;
     NodeT *pParent;
 
-    pKid = findId(tree->pRoot, element.szId);
-    pParent = findId(tree->pRoot, szParentId);
-
-    if (pKid != NULL)
+    pkid = findId(tree->pRoot, element.szId);
+    if (pkid != NULL)
     {
         printf("\tWarning: Id Already in Tree\n");
         return;
     }
-    if(pParent == NULL)
-    {
-        printf("\tWarning: Parent Not Found\n");
-    }
-
-    if (pParent->pChild == NULL)
-        pParent->pChild = pKid;
+    if (strcmp(szParentId, "ROOT") ==0)
+        insertIntoSibling(&(tree->pRoot), element);
     else
+    {
+        pParent = findId(tree->pRoot, szParentId);
+        if (pParent == NULL)
+        {
+            printf("\tParent Not Found\n");
+            return;
+            //ErrExit(ERR_ALGORITHM, "Parent Not Found",...);
+        }
         insertIntoSibling(&(pParent->pChild), element);
+    }
 }
 /******************** deleteItem *****************************
 void deleteItem(Tree tree, char szId[])
