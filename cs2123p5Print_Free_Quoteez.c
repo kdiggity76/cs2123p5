@@ -105,7 +105,7 @@ void printOne(Tree tree, char szId[])
     pNode = findId(pNode, szId);
         if(pNode != NULL)
         {
-            printf("Title: %-8s\nID: %-8\nType: %c\nCostInd: %c\nCost: %.2lf\n"
+            printf("Title: %-8s\nID: %-8s\nType: %c\nCostInd: %c\nCost: %.2lf\n"
                     ,pNode->element.szTitle
                     ,pNode->element.szId
                     ,pNode->element.cNodeType
