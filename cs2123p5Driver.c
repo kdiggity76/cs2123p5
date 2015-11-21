@@ -132,9 +132,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 	NodeT *pTreeNode;
 	//token type for getToken
 	Token szToken;
-
 	//Element type that will save data for various functions that ask for 'element'
-
 	Element element;
 	/* Note: element consists of these traits:
 		char   cNodeType;		      // 'O' - option, 'V' - value
@@ -191,12 +189,20 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			//delimitters similar to getToken to edit strings
 			pszInput = strtok(pszInput, "\n");
 			strcpy(element.szTitle, pszInput);
+			pTreeNode = findId(tree->pRoot, szTempParentID);
+			if(pTreeNode == NULL){
+				printf("ERROR: Parent ID does not exist.\n");
+				return;
+			}
+			pTreeNode = findId(tree->pRoot, element.szId);
+			if(pTreeNode != NULL){
+				printf("ERROR: Node ID already exists in tree.\n");
+				return;
+
+			}
 			//once all elements are finished, element is inserted into insertPriceMenu
 			//along with the tre and Parent ID
-
 			insertPriceMenu(tree, element, szTempParentID);
-
-			//possibly reset all element string values to '\0' to prevent old data being passed to new nodes?f
 
 		}else if(strcmp(szToken, "OPTION") == 0){
 
@@ -220,8 +226,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			memset(szTempParentID, '\0', sizeof(szTempParentID));
    			strcpy(szTempParentID, szToken);
 
-			//check that the parent ID actually exists...
-				//find function inserted here
+
 
 			//last token should be the title, string copied into element.szTitle
 			memset(element.szTitle, '\0', sizeof(element.szTitle));
@@ -229,9 +234,22 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			//delimitters similar to getToken to edit strings
 			pszInput = strtok(pszInput, "\n");
 			strcpy(element.szTitle, pszInput);
+			//Error checking
+			pTreeNode = findId(tree->pRoot, szTempParentID);
+			if(pTreeNode == NULL){
+				printf("ERROR: Parent ID does not exist.\n");
+				return;
+			}
+			pTreeNode = findId(tree->pRoot, element.szId);
+			if(pTreeNode != NULL){
+				printf("ERROR: Node ID already exists in tree.\n");
+				return;
+
+			}
 			//once all elements are finished, element is inserted into insertPriceMenu
 			//along with the tree and Parent ID
 			insertPriceMenu(tree, element, szTempParentID);
+			
 		}else
 			printf("ERROR: DEFINE definition is not OPTION or VALUE...\n");
 
@@ -338,7 +356,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 ////////////QUOTE AND DELETE COMMENTED OUT UNTIL 5.2 IS COMPLETE/////
 	//not supposed to reach this level
 	}else{
-		printf("Data was not read correctly, revise code for better error handling.\n");
+		printf("Unkown data received.\n");
 		printf("Last token read was %s...\n", szToken);
 		exit(1);
 	}
