@@ -41,7 +41,6 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
             else
               kkid = kkid->pSibling;
           }
-          printf("%-7s %\n"
-                , kid->element.szTitle);
+          printf("%-10s \n",kid->element.szTitle);
       }
 }

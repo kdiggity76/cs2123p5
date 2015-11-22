@@ -311,7 +311,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				* For total cost and partial cost, it should also print those totals.
 			*/
 			//DEBUG
-			printf("Initializing determineQuote() function\n");
+			//printf("Initializing determineQuote() function\n");
 			switch (determineQuote(tree, quote).returnCode)
 			{
 				case QUOTE_NORMAL:

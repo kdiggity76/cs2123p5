@@ -22,14 +22,14 @@ Notes:
 **************************************************************************/
 NodeT *findId(NodeT *p, char szId[])
 {
-        if (p == NULL)
-            return;
-        if (strcmp(p->element.szId, szId) == 0)
-            return p;
-        else
-            findId(p->pChild, szId);
+    if (p == NULL)
+        return;
+    if (strcmp(p->element.szId, szId) == 0)
+        return p;
+    else if (p->pChild != NULL)
+        return findId(p->pChild, szId);
 
-         findId(p->pSibling, szId);
+    return findId(p->pSibling, szId);
 }
 /******************** findParent *****************************
 NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
@@ -113,8 +113,24 @@ Notes:
 **************************************************************************/
 void deleteItem(Tree tree, char szId[])
 {
+    NodeT *pkid;
+    NodeT *pParent;
+    NodeT *tempNode;
+    NodeT *topNode;
+    pkid = findId(tree->pRoot, szId);
+    pParent = findParent(pParent, tree->pRoot, pkid);
+    topNode = pParent->pChild;
+    while (topNode != pkid)
+    {
+        topNode = topNode->pSibling;
 
-
+    }
+        if (pkid->pSibling != NULL)
+        {
+            tempNode = pkid->pSibling;
+            topNode = tempNode;
+        }
+        free (pkid);
 }
 /******************** insertIntoSibling *****************************
  void insertIntoSibling(NodeT **pp, Element element)
