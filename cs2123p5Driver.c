@@ -276,8 +276,8 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				printPriceMenu(tree);
 		}else
 			printf("ERROR: PRINT definition is not ONE or ALL...\n");
-////////////QUOTE AND DELETE COMMENTED OUT UNTIL 5.2 IS COMPLETE/////
-/*	}else if(strcmp(szToken, "QUOTE") == 0){
+
+	}else if(strcmp(szToken, "QUOTE") == 0){
 		//get next token in buffer
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 
@@ -312,7 +312,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				* For total cost and partial cost, it should also print those totals.
 			*/
 			//DEBUG
-			/*printf("Initializing determineQuote() function\n");
+			//printf("Initializing determineQuote() function\n");
 			switch (determineQuote(tree, quote).returnCode)
 			{
 				case QUOTE_NORMAL:
@@ -353,7 +353,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 		deleteItem(tree, szToken);
 */
-////////////QUOTE AND DELETE COMMENTED OUT UNTIL 5.2 IS COMPLETE/////
+
 	//not supposed to reach this level
 	}else{
 		printf("Unkown data received.\n");

@@ -67,24 +67,23 @@ Notes:
 If empty tree is passed to the function it will do nothing.
 
 **************************************************************************/
-//void printQuote(NodeT pNode)
-//{
-//    double dTotal = 0;
-//    printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
-//.
-//    if(pNode==NULL)
-//        return;
-//    if (pNode->element.cNodeType == 'O')
-//        {
-//            printf("%-8s\t%-26s\t%.2lf\n"
-//                ,pNode->element.szTitle
-//                ,pNode->pChild->element.szTitle
-//                ,pNode->pChild->element.dCost);
-//            *dTotal = *dTotal + pNode->pChild->element.dCost;
-//        }
-//    printNodes(pNode->pChild);
-//    printNodes(pNode->pSibling);
-//}
+void printQuote(NodeT *pNode, NodeT *pParent)
+{
+    double dTotal = 0;
+    printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
+
+    if(pNode == NULL)
+        return;
+
+    if (pNode->element.cNodeType == 'V')
+        {
+            printf("%-8s\t%-26s\t%.2lf\n"
+                ,pParent->element.szTitle
+                ,pNode->element.szTitle
+                ,pNode->element.dCost);
+            dTotal = dTotal + pNode->element.dCost;
+        }
+}
 /******************** printOne *****************************
 void printOne(Tree tree, char szId[])
 Purpose:

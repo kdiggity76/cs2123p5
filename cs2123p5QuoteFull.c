@@ -40,7 +40,8 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
             else
               kkid = kkid->pSibling;
           }
+
       }
-      printQuote(kid);
+      printQuote(kkid, kid);
       return *newQuote;
 }

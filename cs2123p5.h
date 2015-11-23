@@ -150,7 +150,7 @@ NodeT createNode(char *szID, char cType, double cost, char *szTitle);
 void printNodes(NodeT *pNode);
 NodeT *allocateNodeT(Element value);
 void insertIntoChild(NodeT **pp, Element element);
-void printQuote(NodeT pNode);
+void printQuote(NodeT *pNode, NodeT *pParent);
 
 // Driver function to process a input data line.  Groups must write this function
 void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]);
