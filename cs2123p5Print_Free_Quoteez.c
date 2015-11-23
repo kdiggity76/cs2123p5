@@ -34,7 +34,6 @@ void printNodes(NodeT *pNode)
 {
     if(pNode==NULL)
         return;
-        printf("\t\t");
     if (pNode->element.cNodeType == 'O')
     {
         printf("%-9s"
