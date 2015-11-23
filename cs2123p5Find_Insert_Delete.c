@@ -113,8 +113,18 @@ Notes:
 **************************************************************************/
 void deleteItem(Tree tree, char szId[])
 {
-
-
+    NodeT *pkid;
+    NodeT *pParent;
+    NodeT *pBeforeSibling;
+    
+    pkid = findId(tree->pRoot, szId);
+    pParent = findParent(pParent, tree->pRoot, pkid);
+    
+    pBeforeSibling = beforeSibling(&(pParent->pChild), pkid);
+    pBeforeSibling->pSibling = pkid->pSibling;
+    pkid->pSibling = NULL;
+    freeSubTree(pkid);
+    
 }
 /******************** insertIntoSibling *****************************
  void insertIntoSibling(NodeT **pp, Element element)
@@ -137,7 +147,15 @@ void insertIntoSibling(NodeT **pp, Element element)
         insertIntoSibling(&((*pp)->pSibling), element);
 }
 
-
+NodeT beforeSibling(NodeT **pp, NodeT *pKid)
+{
+    if (*pp ==NULL)
+        return;
+    if (*pp->pSibling != pKid)
+        return goToSibling(&((*pp)->pSibling), pKid);
+    else
+        return *pp;
+}
 
 
 
