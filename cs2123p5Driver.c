@@ -293,7 +293,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			//second token is the OptionID
 			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 			//find the ID in the tree to make sure it exists
-			pTreeNode = findId(pTreeNode, szToken);
+			pTreeNode = findId(tree->pRoot, szToken);
 			//the cost from the retrieved node is assigned as well
 			quote->quoteItemM[quote->iQuoteItemCnt].dCost = pTreeNode->element.dCost;
 			//last token for QUOTE OPTION is the Selection ID
