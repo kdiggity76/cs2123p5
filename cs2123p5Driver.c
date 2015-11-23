@@ -294,6 +294,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 			//find the ID in the tree to make sure it exists
 			pTreeNode = findId(tree->pRoot, szToken);
+			strcpy(quote->quoteItemM[quote->iQuoteItemCnt].szOptionId, pTreeNode->element.szId);
 			//the cost from the retrieved node is assigned as well
 			quote->quoteItemM[quote->iQuoteItemCnt].dCost = pTreeNode->element.dCost;
 			//last token for QUOTE OPTION is the Selection ID
@@ -595,21 +596,3 @@ char * getToken(char *pszInputTxt, char szToken[], int iTokenSize)
         return pszInputTxt + 1;
 }
 
-/******************** QuoteResult *****************************
-QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
-Purpose:
-
-
-Parameters:
-
-
-Notes:
-
-
-
-**************************************************************************/
-//QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
-//{
-
-
-//}
