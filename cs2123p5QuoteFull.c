@@ -26,7 +26,6 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
     NodeT *kid;
     NodeT *kkid;
     int i,k;
-    double total = 0;
       for (i = 0; i < quoteSelection->iQuoteItemCnt; i++)
       {
         kid = findId(tree->pRoot, quoteSelection->quoteItemM[i].szOptionId);
@@ -41,6 +40,7 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
             else
               kkid = kkid->pSibling;
           }
-          printf("%-10s \n",kid->element.szTitle);
       }
+      printQuote(kid);
+      return *newQuote;
 }
