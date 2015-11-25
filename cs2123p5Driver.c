@@ -190,16 +190,16 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			pszInput = strtok(pszInput, "\n");
 			strcpy(element.szTitle, pszInput);
 			pTreeNode = findId(tree->pRoot, szTempParentID);
-			//if(pTreeNode == NULL){
-				//printf("ERROR: Parent ID does not exist.\n");
-				//return;
-			//}
+			//Error handling at Driver Level
+			if(pTreeNode == NULL){
+				printf("ERROR: Parent ID does not exist.\n");
+				return;
+			}
 			pTreeNode = findId(tree->pRoot, element.szId);
-			//if(pTreeNode != NULL){
-				//printf("ERROR: Node ID already exists in tree.\n");
-				//return;
-
-			//}
+			if(pTreeNode != NULL){
+				printf("ERROR: Node ID already exists in tree.\n");
+				return;
+			}
 			//once all elements are finished, element is inserted into insertPriceMenu
 			//along with the tre and Parent ID
 			insertPriceMenu(tree, element, szTempParentID);
@@ -235,12 +235,12 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			pszInput = strtok(pszInput, "\n");
 			strcpy(element.szTitle, pszInput);
 			//Error checking
-			pTreeNode = findId(tree->pRoot, szTempParentID);
+			//pTreeNode = findId(tree->pRoot, szTempParentID);
 			//if(pTreeNode == NULL){
 				//printf("ERROR: Parent ID does not exist.\n");
 				//return;
 			//}
-			pTreeNode = findId(tree->pRoot, element.szId);
+			//pTreeNode = findId(tree->pRoot, element.szId);
 			//if(pTreeNode != NULL){
 				//printf("ERROR: Node ID already exists in tree.\n");
 				//return;
@@ -317,32 +317,33 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			*/
 			//DEBUG
 			//printf("Initializing determineQuote() function\n");
-			switch (determineQuote(tree, quote).returnCode)
+			QuoteResult finalQuote = determineQuote(tree, quote);
+			switch (finalQuote.returnCode)
 			{
 				case QUOTE_NORMAL:
-					printf("Full quote COMPLETE.\n");
+					printf("Full quote Complete.\n");
 					//print total cost of partial quote here
-					printf("PLACEHOLDER: Print total cost here.");
+					printf("TOTAL:\t\t%.2lf\n", finalQuote.dTotalCost);
 				break;
 
 				case QUOTE_PARTIAL:
 					printf("Partial quote COMPLETE.\n");
 					//print total cost of partial quote here
-					printf("PLACEHOLDER: Print total cost here.");
+					printf("TOTAL:\t\t%.2lf\n", finalQuote.dTotalCost);
 					return;
 				break;
 
 				case QUOTE_BAD_OPTION:
-					ErrExit(QUOTE_BAD_OPTION, "Option error: %d\n", determineQuote(tree, quote).returnCode);
+					ErrExit(QUOTE_BAD_OPTION, "Option error: %d\n", finalQuote.returnCode);
 				break;
 
 				case QUOTE_BAD_SELECTION:
-					ErrExit(QUOTE_BAD_SELECTION, "Selection error: %d\n", determineQuote(tree, quote).returnCode);
+					ErrExit(QUOTE_BAD_SELECTION, "Selection error: %d\n", finalQuote.returnCode);
 				break;
 
 				default:
 				printf("ERROR: Unknown error code returned by determineQuote.\n");
-				ErrExit(ERR_ALGORITHM, "Unknown event type: %d\n", determineQuote(tree, quote).returnCode);
+				ErrExit(ERR_ALGORITHM, "Unknown event type: %d\n", finalQuote.returnCode);
 			}
 
 
@@ -352,7 +353,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 	}else if(strcmp(szToken, "DELETE") == 0){
 		/* deletes one item (and its pChild children )from the tree.
 		It should not delete its siblings.  The deleted nodes
-		must be freed.  This is used from the DELETE command. //Move '/*' comment back to here after 5.2.
+		must be freed.  This is used from the DELETE command. //Move comment back to here after 5.2.
 		//get next token in buffer, which is the ID of the node to delete
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 		deleteItem(tree, szToken);
@@ -599,4 +600,3 @@ char * getToken(char *pszInputTxt, char szToken[], int iTokenSize)
     else
         return pszInputTxt + 1;
 }
-
