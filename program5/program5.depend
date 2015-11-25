@@ -6,7 +6,7 @@
 	<stdlib.h>
 	"cs2123p5.h"
 
-1448294807 /home/kdiggity/CS2123/program5/cs2123p5/cs2123p5.h
+1448326603 /home/kdiggity/CS2123/program5/cs2123p5/cs2123p5.h
 
 1448293123 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Find_Insert_Delete.c
 	<stdio.h>
@@ -15,14 +15,14 @@
 	<stdlib.h>
 	"cs2123p5.h"
 
-1448294703 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Print_Free_Quoteez.c
+1448328715 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Print_Free_Quoteez.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
 	<stdlib.h>
 	"cs2123p5.h"
 
-1448296133 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5QuoteFull.c
+1448300066 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5QuoteFull.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>

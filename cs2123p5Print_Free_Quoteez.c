@@ -27,29 +27,56 @@ void printPriceMenu(Tree tree)
     printf("Price Menu:\n");
     NodeT *pNode;
     pNode = tree->pRoot;
-    printNodes(pNode);
+    printNodes(pNode, 0, 0);
     printf("\n");
 }
-void printNodes(NodeT *pNode)
+void printNodes(NodeT *pNode, int iIndent, int newline)
 {
     if(pNode==NULL)
         return;
-        printf("\t\t");
+    if (newline == 1)
+    {
+            switch (iIndent)
+        {
+            case 0:
+                newline = 0;
+                break;
+            case 1:
+                printf("\t\t");
+                newline = 0;
+                break;
+            case 2:
+                printf("\t\t\t\t  ");
+                newline = 0;
+                break;
+            case 3:
+                printf("\t\t\t\t\t\t   ");
+                newline = 0;
+                break;
+            case 4:
+                printf("\t\t\t\t\t\t\t");
+                newline = 0;
+                break;
+        }
+    }
+
     if (pNode->element.cNodeType == 'O')
     {
-        printf("%-9s"
+        printf("%s "
             ,pNode->element.szTitle);
-        printf("(Option) ");
+        printf("(Option)  ");
     }
     if (pNode->element.cNodeType == 'V')
-            printf("%-10s\t$%.2lf "
+            printf("%-7s $%.2lf "
                 ,pNode->element.szTitle
                 ,pNode->element.dCost);
     if(pNode->pChild == NULL)
+    {
         printf("\n");
-
-    printNodes(pNode->pChild);
-    printNodes(pNode->pSibling);
+        newline = 1;
+    }
+    printNodes(pNode->pChild, iIndent+1, newline);
+    printNodes(pNode->pSibling, iIndent, newline);
 
 }
 /******************** printQuote *****************************
@@ -69,8 +96,8 @@ If empty tree is passed to the function it will do nothing.
 **************************************************************************/
 void printQuote(NodeT *pNode, NodeT *pParent)
 {
-    double dTotal = 0;
-    printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
+    //double dTotal = 0;
+    //printf("Total\t\t\t\t\t\t%.2lf\n", dTotal);
 
     if(pNode == NULL)
         return;
@@ -81,7 +108,7 @@ void printQuote(NodeT *pNode, NodeT *pParent)
                 ,pParent->element.szTitle
                 ,pNode->element.szTitle
                 ,pNode->element.dCost);
-            dTotal = dTotal + pNode->element.dCost;
+            //dTotal = dTotal + pNode->element.dCost;
         }
 }
 /******************** printOne *****************************

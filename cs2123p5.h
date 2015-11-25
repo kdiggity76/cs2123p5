@@ -147,7 +147,7 @@ void insertIntoSibling(NodeT **pp, Element element);
 
 //created by Kevin
 NodeT createNode(char *szID, char cType, double cost, char *szTitle);
-void printNodes(NodeT *pNode);
+void printNodes(NodeT *pNode, int iIndent, int newline);
 NodeT *allocateNodeT(Element value);
 void insertIntoChild(NodeT **pp, Element element);
 void printQuote(NodeT *pNode, NodeT *pParent);
