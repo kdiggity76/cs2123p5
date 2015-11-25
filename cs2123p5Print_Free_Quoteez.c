@@ -27,56 +27,30 @@ void printPriceMenu(Tree tree)
     printf("Price Menu:\n");
     NodeT *pNode;
     pNode = tree->pRoot;
-    printNodes(pNode, 0, 0);
+    printNodes(pNode, 0);
     printf("\n");
 }
-void printNodes(NodeT *pNode, int iIndent, int newline)
+void printNodes(NodeT *pNode, int iIndent)
 {
+    int i;
     if(pNode==NULL)
         return;
-    if (newline == 1)
+    for (i=0; i < iIndent; i++)
     {
-            switch (iIndent)
-        {
-            case 0:
-                newline = 0;
-                break;
-            case 1:
-                printf("\t\t");
-                newline = 0;
-                break;
-            case 2:
-                printf("\t\t\t\t  ");
-                newline = 0;
-                break;
-            case 3:
-                printf("\t\t\t\t\t\t   ");
-                newline = 0;
-                break;
-            case 4:
-                printf("\t\t\t\t\t\t\t");
-                newline = 0;
-                break;
-        }
+        printf("        ");
     }
-
     if (pNode->element.cNodeType == 'O')
     {
         printf("%s "
             ,pNode->element.szTitle);
-        printf("(Option)  ");
+        printf("(Option)\n");
     }
     if (pNode->element.cNodeType == 'V')
-            printf("%-7s $%.2lf "
+            printf("%-7s $%.2lf\n"
                 ,pNode->element.szTitle
                 ,pNode->element.dCost);
-    if(pNode->pChild == NULL)
-    {
-        printf("\n");
-        newline = 1;
-    }
-    printNodes(pNode->pChild, iIndent+1, newline);
-    printNodes(pNode->pSibling, iIndent, newline);
+    printNodes(pNode->pChild, iIndent+1);
+    printNodes(pNode->pSibling, iIndent);
 
 }
 /******************** printQuote *****************************
