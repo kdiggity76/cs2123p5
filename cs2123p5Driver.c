@@ -294,6 +294,10 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 			//find the ID in the tree to make sure it exists
 			pTreeNode = findId(tree->pRoot, szToken);
+			if(pTreeNode == NULL){
+                printf("Error in reading Quote data, last token read was %s\n", szToken);
+                return;
+            }
 			strcpy(quote->quoteItemM[quote->iQuoteItemCnt].szOptionId, pTreeNode->element.szId);
 			//the cost from the retrieved node is assigned as well
 			quote->quoteItemM[quote->iQuoteItemCnt].dCost = pTreeNode->element.dCost;
@@ -331,11 +335,13 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				break;
 
 				case QUOTE_BAD_OPTION:
-					ErrExit(QUOTE_BAD_OPTION, "Option error: %d\n", finalQuote.returnCode);
+					printf("Option error encountered\n");
+					return;
 				break;
 
 				case QUOTE_BAD_SELECTION:
-					ErrExit(QUOTE_BAD_SELECTION, "Selection error: %d\n", finalQuote.returnCode);
+					printf("Selection error encountered\n");
+					return;
 				break;
 
 				default:
@@ -348,13 +354,16 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			printf("ERROR: QUOTE definition is not BEGIN, OPTION, or END...\n");
 
 	}else if(strcmp(szToken, "DELETE") == 0){
-		/* deletes one item (and its pChild children )from the tree.
+        /*deletes one item (and its pChild children )from the tree.
 		It should not delete its siblings.  The deleted nodes
 		must be freed.  This is used from the DELETE command. //Move comment back to here after 5.2.
 		//get next token in buffer, which is the ID of the node to delete
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 		deleteItem(tree, szToken);
-*/
+        */
+        printf("DELETE ENCOUNTERED, exiting for now\n");
+        //remove this exit when DELETE is fixed
+        exit(1);
 
 	//not supposed to reach this level
 	}else{
@@ -596,4 +605,3 @@ char * getToken(char *pszInputTxt, char szToken[], int iTokenSize)
     else
         return pszInputTxt + 1;
 }
-
