@@ -294,6 +294,9 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 			//find the ID in the tree to make sure it exists
 			pTreeNode = findId(tree->pRoot, szToken);
+			if (pTreeNode == NULL)
+                printf("Error, option not found: %s", szToken);
+            else
 			strcpy(quote->quoteItemM[quote->iQuoteItemCnt].szOptionId, pTreeNode->element.szId);
 			//the cost from the retrieved node is assigned as well
 			quote->quoteItemM[quote->iQuoteItemCnt].dCost = pTreeNode->element.dCost;
@@ -361,6 +364,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 		printf("Last token read was %s...\n", szToken);
 		exit(1);
 	}
+	pTreeNode = NULL;
 }
 /******************** newTree **************************************
   Tree newTree()
