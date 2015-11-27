@@ -28,36 +28,40 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
     NodeT *pKid;
     int q, i;
     //i count is the iLevel, q is the count of the queue
-
-    for(q = 0; q < quoteSelection->iQuoteItemCnt; q++)
+    //check for any "notFound"'s
+    for(i = 0; i < sizeof(quoteSelection->quoteItemM[i]); i++)
     {
-        /*
-            * This is a complete quote
-            *
-            QUOTE BEGIN
-            QUOTE OPTION 0 model 1
-            QUOTE OPTION 1 engine_base 1
-            QUOTE OPTION 1 color_base 2
-            QUOTE OPTION 1 audio_base 2
-            QUOTE OPTION 0 warranty 2
-            QUOTE END
-            *
-            *
-            ********************************* PARTIAL QUOTE ********
-            *
-            QUOTE BEGIN
-            QUOTE OPTION 0 model 3
-            QUOTE OPTION 1 engine_oy 2
-            QUOTE OPTION 1 color_oy 2
-            QUOTE OPTION 0 warranty 3
-            QUOTE END
-            *
-        */
-        if (strcmp(quoteSelection->quoteItemM[q].szOptionId, "notFound")==0)
+        if (quoteSelection->quoteItemM[i].dCost == -999999)
         {
+            strcpy(newQuote.error.szOptionId, quoteSelection->quoteItemM[i].szOptionId);
             newQuote.returnCode = 2;
             return newQuote;
         }
+    }
+    for(q = 0; q < quoteSelection->iQuoteItemCnt; q++)
+    {
+
+        //using findId to find parent node szOptionId
+        pKid = findId(tree->pRoot,quoteSelection->quoteItemM[q].szOptionId);
+        //move to options below parent node for iSelection
+        pKid = pKid->pChild;
+        //traverse siblings based on iSelection, starting at 1
+        for(i = 1; i < quoteSelection->quoteItemM[q].iSelection; i++)
+        {
+            if (pKid->pSibling == NULL)
+            {
+                strcpy(newQuote.error.szOptionId, quoteSelection->quoteItemM[i].szOptionId);
+                newQuote.error.iSelection = quoteSelection->quoteItemM[q].iSelection;
+                newQuote.returnCode = 3;
+                return newQuote;
+            }
+            pKid = pKid->pSibling;
+        }
+
+    }
+    for(q = 0; q < quoteSelection->iQuoteItemCnt; q++)
+    {
+
         //using findId to find parent node szOptionId
         pKid = findId(tree->pRoot,quoteSelection->quoteItemM[q].szOptionId);
         //Print title of the Parent Node
@@ -67,11 +71,14 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
         //traverse siblings based on iSelection, starting at 1
         for(i = 1; i < quoteSelection->quoteItemM[q].iSelection; i++)
         {
+            //not needed since error check already performed
+            /*
             if (pKid->pSibling == NULL)
             {
                 newQuote.returnCode = 3;
                 return newQuote;
             }
+            */
             pKid = pKid->pSibling;
         }
 
