@@ -294,8 +294,10 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 			//find the ID in the tree to make sure it exists
 			pTreeNode = findId(tree->pRoot, szToken);
-			if (pTreeNode == NULL)
-			strcpy(quote->quoteItemM[quote->iQuoteItemCnt].szOptionId, "notFound");
+			if (pTreeNode == NULL){
+                strcpy(quote->quoteItemM[quote->iQuoteItemCnt].szOptionId, szToken);
+                quote->quoteItemM[quote->iQuoteItemCnt].dCost = -999999;
+            }
 			else
 			{
             strcpy(quote->quoteItemM[quote->iQuoteItemCnt].szOptionId, pTreeNode->element.szId);
@@ -323,24 +325,24 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			switch (finalQuote.returnCode)
 			{
 				case QUOTE_NORMAL:
-					printf("Full quote Complete.\n");
+					printf("\n\nFull quote Complete.\n");
 					//print total cost of partial quote here
-					printf("TOTAL:\t\t%.2lf\n", finalQuote.dTotalCost);
+					printf("TOTAL:\t\t%.2lf\n\n", finalQuote.dTotalCost);
 				break;
 
 				case QUOTE_PARTIAL:
-					printf("Partial quote COMPLETE.\n");
+					printf("\n\nPartial quote COMPLETE.\n");
 					//print total cost of partial quote here
-					printf("TOTAL:\t\t%.2lf\n", finalQuote.dTotalCost);
+					printf("TOTAL:\t\t%.2lf\n\n", finalQuote.dTotalCost);
 					return;
 				break;
 
 				case QUOTE_BAD_OPTION:
-					printf("Option error: %d\n", finalQuote.returnCode);
+					printf("\nOption ERROR: Option %s does not exist.\n\n", finalQuote.error.szOptionId);
 				break;
 
 				case QUOTE_BAD_SELECTION:
-					printf("Selection error: %d\n", finalQuote.returnCode);
+					printf("\nSelection ERROR: Selection %d of Option %s does not exist.\n\n", finalQuote.error.iSelection, finalQuote.error.szOptionId);
 				break;
 
 				default:
