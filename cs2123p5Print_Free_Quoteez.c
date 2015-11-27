@@ -46,7 +46,7 @@ void printNodes(NodeT *pNode, int iIndent)
         printf("(Option)\n");
     }
     if (pNode->element.cNodeType == 'V')
-            printf("%-7s $%.2lf\n"
+            printf("%-7s %10.2lf\n"
                 ,pNode->element.szTitle
                 ,pNode->element.dCost);
     printNodes(pNode->pChild, iIndent+1);

@@ -297,9 +297,11 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			if (pTreeNode == NULL)
 			strcpy(quote->quoteItemM[quote->iQuoteItemCnt].szOptionId, "notFound");
 			else
+			{
             strcpy(quote->quoteItemM[quote->iQuoteItemCnt].szOptionId, pTreeNode->element.szId);
 			//the cost from the retrieved node is assigned as well
 			quote->quoteItemM[quote->iQuoteItemCnt].dCost = pTreeNode->element.dCost;
+			}
 			//last token for QUOTE OPTION is the Selection ID
 			pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 			quote->quoteItemM[quote->iQuoteItemCnt].iSelection = atoi(szToken);
@@ -334,11 +336,11 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				break;
 
 				case QUOTE_BAD_OPTION:
-					ErrExit(QUOTE_BAD_OPTION, "Option error: %d\n", finalQuote.returnCode);
+					printf("Option error: %d\n", finalQuote.returnCode);
 				break;
 
 				case QUOTE_BAD_SELECTION:
-					ErrExit(QUOTE_BAD_SELECTION, "Selection error: %d\n", finalQuote.returnCode);
+					printf("Selection error: %d\n", finalQuote.returnCode);
 				break;
 
 				default:

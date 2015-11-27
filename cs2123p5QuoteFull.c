@@ -53,6 +53,11 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
             QUOTE END
             *
         */
+        if (strcmp(quoteSelection->quoteItemM[q].szOptionId, "notFound")==0)
+        {
+            newQuote.returnCode = 2;
+            return newQuote;
+        }
         //using findId to find parent node szOptionId
         pKid = findId(tree->pRoot,quoteSelection->quoteItemM[q].szOptionId);
         //Print title of the Parent Node
@@ -61,7 +66,14 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
         pKid = pKid->pChild;
         //traverse siblings based on iSelection, starting at 1
         for(i = 1; i < quoteSelection->quoteItemM[q].iSelection; i++)
+        {
+            if (pKid->pSibling == NULL)
+            {
+                newQuote.returnCode = 3;
+                return newQuote;
+            }
             pKid = pKid->pSibling;
+        }
 
         printf("\t%s", pKid->element.szTitle);
         printf("\t\t\t%.2lf\n",  pKid->element.dCost);

@@ -103,26 +103,6 @@ QUOTE OPTION 1 audio_base 3
 QUOTE OPTION 0 warranty 2
 QUOTE END
 *
-********************************* Bad Level ********
-*
-QUOTE BEGIN
-QUOTE OPTION 0 model 1
-QUOTE OPTION 1 engine_base 1
-QUOTE OPTION 0 color_base 2
-QUOTE OPTION 1 audio_base 3
-QUOTE OPTION 0 warranty 2
-QUOTE END
-*
-********************************* Bad szID ********
-*
-QUOTE BEGIN
-QUOTE OPTION 0 model 1
-QUOTE OPTION 1 engine_base 1
-QUOTE OPTION 0 colour_base 2
-QUOTE OPTION 1 audio_base 3
-QUOTE OPTION 0 warranty 2
-QUOTE END
-*
 ******************************** DELETE OPTION VALUE **************
 *
 * Delete the seaGreen, but dont delete empress and blackPearl
