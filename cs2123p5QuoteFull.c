@@ -27,9 +27,10 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
 
     NodeT *pKid;
     int q, i;
+
     //i count is the iLevel, q is the count of the queue
     //check for any "notFound"'s
-    for(i = 0; i < sizeof(quoteSelection->quoteItemM[i]); i++)
+    for(i = 0; i < quoteSelection->iQuoteItemCnt; i++)
     {
         if (quoteSelection->quoteItemM[i].dCost == -999999)
         {
@@ -59,6 +60,10 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
         }
 
     }
+    if (quoteSelection->iQuoteItemCnt < 5)
+        printf("*\n************************* PARTIAL QUOTE **************\n*\n");
+    else
+        printf("*\n************************* QUOTE **********************\n*\n");
     for(q = 0; q < quoteSelection->iQuoteItemCnt; q++)
     {
 
