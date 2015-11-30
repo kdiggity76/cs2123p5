@@ -8,95 +8,172 @@
 #include "cs2123p5.h"
 
 /******************** findId *****************************
-NodeT *findId(NodeT *p, char szId[])
-Purpose:
+ NodeT *findId(NodeT *p, char szId[])
+ Purpose:
 
 
-Parameters:
+ Parameters:
 
 
-Notes:
+ Notes:
 
 
 
-**************************************************************************/
+ **************************************************************************/
 NodeT *findId(NodeT *p, char szId[])
 {
     if (p == NULL)
-        return NULL;
-    if (strcmp(szId, p->element.szId)==0)
         return p;
-    p = findId(p->pChild, szId);
-    p = findId(p->pSibling, szId);
+    if (strcmp(p->element.szId, szId) == 0)
+        return p;
+    if (findId(p->pChild, szId) == NULL)
+        return findId(p->pSibling, szId);
+    else
+        return findId(p->pChild, szId);
 }
-/******************** findParent *****************************
-NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
-Purpose:
+
+/******************** insertPriceMenu *****************************
+ void insertPriceMenu(Tree tree, Element element, char szParentId[])
+ Purpose:
 
 
-Parameters:
+ Parameters:
 
 
-Notes:
+ Notes:
 
 
 
-**************************************************************************/
-NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
+ **************************************************************************/
+void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
-    if (p==NULL)
-        return NULL;
-    if (pkid == NULL)
-        return NULL;
+    NodeT *pkid;
+    NodeT *pParent;
 
-    if (p == pkid)
+    pkid = findId(tree->pRoot, element.szId);
+    if (pkid != NULL)
     {
-        return pParent;
+        printf("\tWarning: Id Already in Tree\n");
+        return;
     }
+    if (strcmp(szParentId, "ROOT") ==0)
+        insertIntoSibling(&(tree->pRoot), element);
     else
     {
-        if(p->pChild ==NULL)
-            return findParent(pParent,p->pSibling, pkid);
-        else
+        pParent = findId(tree->pRoot, szParentId);
+        if (pParent == NULL)
         {
-            pParent = p;
-            return findParent(pParent,p->pChild, pkid);
+            printf("\tParent Not Found\n");
+            return;
         }
+        insertIntoSibling(&(pParent->pChild), element);
     }
 }
-/******************** insertPriceMenu *****************************
-void insertPriceMenu(Tree tree, Element element, char szParentId[])
-Purpose:
+
+/******************** insertIntoSibling *****************************
+ void insertIntoSibling(NodeT **pp, Element element)
+ Purpose:
 
 
-Parameters:
+ Parameters:
 
 
-Notes:
+ Notes:
 
 
 
-**************************************************************************/
-void insertPriceMenu(Tree tree, Element element, char szParentId[])
+ **************************************************************************/
+void insertIntoSibling(NodeT **pp, Element element)
 {
-
-
+    if(*pp == NULL)
+        *pp = allocateNodeT(element);
+    else
+        insertIntoSibling(&((*pp)->pSibling), element);
 }
-/******************** deleteItem *****************************
-void deleteItem(Tree tree, char szId[])
-Purpose:
+//Logan's version
 
-
-Parameters:
-
-
-Notes:
-
-
-
-**************************************************************************/
-void deleteItem(Tree tree, char szId[])
+NodeT *beforeSibling(NodeT *p, NodeT *pKid)
 {
+    if (p ==NULL)
+        return p;
+    if (p->pSibling != pKid)
+        return beforeSibling(p->pSibling, pKid);
+    else
+        return p;
+}
 
+/******************** findParent *****************************
+ NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
+ Purpose:
+
+
+ Parameters:
+
+
+ Notes:
+
+
+
+ **************************************************************************/
+NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pKid)
+{
+    //p set to first child of parent node
+    p = pParent->pChild;
+    if(p != NULL)
+        printf("p is now child %s of pParent %s\n", p->element.szId, pParent->element.szId);
+
+    if(p == NULL){
+        //no child nodes left
+        printf("p was NULL");
+        return p;
+    }
+    else if(strcmp(p->element.szId, pKid->element.szId) == 0)
+        //if match, pParent should be the Parent ID
+        return pParent;
+    else
+    {
+            //Parent node is now p to search through p's child nodes
+            pParent = p;
+            pParent = findParent(pParent, p, pKid);
+    }
+
+    pParent = pParent->pSibling;
+    pParent = findParent(pParent, p, pKid);
+
+    return pParent;
+}
+
+/******************** deleteItem *****************************
+ void deleteItem(Tree tree, char szId[])
+ Purpose:
+
+
+ Parameters:
+
+
+ Notes:
+
+ n
+
+ **************************************************************************/
+    void deleteItem(Tree tree, char szId[])
+{
+    NodeT *pKid;
+    NodeT *pParent;
+    NodeT *pTemp = NULL;
+
+
+    //find Node
+    //delete all Node's children
+    //connect Node's sibling's (or sibling to parent if Node is connected to parent)
+    //free Node
+
+    pKid = findId(tree->pRoot, szId);
+    pParent = findParent(tree->pRoot, pTemp, pKid);
+    pTemp = beforeSibling(pParent->pChild, pKid);
+
+    pTemp->pSibling = pKid->pSibling;
+    pKid->pSibling = NULL;
+    freeSubTree(pKid);
 
 }
