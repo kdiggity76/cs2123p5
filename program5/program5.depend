@@ -9,21 +9,21 @@
 
 1448466342 /home/kdiggity/CS2123/program5/cs2123p5/cs2123p5.h
 
-1448903380 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Find_Insert_Delete.c
+1448907427 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Find_Insert_Delete.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
 	<stdlib.h>
 	"cs2123p5.h"
 
-1448905768 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Print_Free_Quoteez.c
+1448907446 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Print_Free_Quoteez.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
 	<stdlib.h>
 	"cs2123p5.h"
 
-1448847525 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5QuoteFull.c
+1448906788 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5QuoteFull.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>

@@ -165,5 +165,7 @@ void deleteItem(Tree tree, char szId[])
         pkid->pSibling = NULL;
     }
     freeSubTree(pkid);
+    printf("*\n****************************** DELETE ***************\n*\n");
+    printf("DELETE %s\n", szId);
 
 }
