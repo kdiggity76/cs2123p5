@@ -361,7 +361,8 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 		//get next token in buffer, which is the ID of the node to delete
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 		deleteItem(tree, szToken);
-
+    }else if(strcmp(szToken, " ") == 0){
+        return;
 	//not supposed to reach this level
 	}else{
 		printf("Unkown data received.\n");
