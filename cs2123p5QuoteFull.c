@@ -26,17 +26,41 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
     newQuote.dTotalCost = 0.0;
 
     NodeT *pKid;
-    int q, i;
+
+    int q, i, k;
     //i count is the iLevel, q is the count of the queue
     //check for any "notFound"'s
-    for(i = 0; i < sizeof(quoteSelection->quoteItemM[i]); i++)
+    for(i = 0; i < quoteSelection->iQuoteItemCnt; i++)
     {
+
         if (quoteSelection->quoteItemM[i].dCost == -999999)
         {
+            printf("*\n******************** QUOTE OPTION ERROR *********************\n*\n");
             strcpy(newQuote.error.szOptionId, quoteSelection->quoteItemM[i].szOptionId);
             newQuote.returnCode = 2;
             return newQuote;
         }
+
+        for(k = 0; k < quoteSelection->iQuoteItemCnt; k++)
+        {
+
+            if(k == i)
+                continue;
+            else if(quoteSelection->quoteItemM[k].iLevel == quoteSelection->quoteItemM[i].iLevel)
+            {
+                if(strcmp(quoteSelection->quoteItemM[k].szOptionId, quoteSelection->quoteItemM[i].szOptionId) == 0)
+                {
+
+                    strcpy(newQuote.error.szOptionId, quoteSelection->quoteItemM[i].szOptionId);
+                    printf("*\n******************** QUOTE DUPLICATE OPTION ERROR *********************\n*\n");
+                    printf("Duplicate %s found.\n", newQuote.error.szOptionId);
+                    newQuote.returnCode = 2;
+                    return newQuote;
+                }
+
+            }
+        }
+
     }
     for(q = 0; q < quoteSelection->iQuoteItemCnt; q++)
     {
@@ -52,6 +76,7 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
             {
                 strcpy(newQuote.error.szOptionId, quoteSelection->quoteItemM[i].szOptionId);
                 newQuote.error.iSelection = quoteSelection->quoteItemM[q].iSelection;
+                printf("*\n******************** QUOTE SELECTION ERROR *********************\n*\n");
                 newQuote.returnCode = 3;
                 return newQuote;
             }
@@ -59,6 +84,10 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
         }
 
     }
+    if (quoteSelection->iQuoteItemCnt < 5)
+        printf("*\n************************* PARTIAL QUOTE **************\n*\n");
+    else
+        printf("*\n************************* QUOTE **********************\n*\n");
     for(q = 0; q < quoteSelection->iQuoteItemCnt; q++)
     {
 

@@ -24,6 +24,7 @@ If empty tree is passed to the function it will do nothing.
 **************************************************************************/
 void printPriceMenu(Tree tree)
 {
+    printf("*\n************************* PRINT ALL *******************\n*\n");
     printf("Price Menu:\n");
     NodeT *pNode;
     pNode = tree->pRoot;
@@ -75,14 +76,13 @@ void printQuote(NodeT *pNode, NodeT *pParent)
 
     if(pNode == NULL)
         return;
-
+    printf("*\n************************* QUOTE **************\n*\n");
     if (pNode->element.cNodeType == 'V')
         {
             printf("%-8s\t%-26s\t%.2lf\n"
                 ,pParent->element.szTitle
                 ,pNode->element.szTitle
                 ,pNode->element.dCost);
-            //dTotal = dTotal + pNode->element.dCost;
         }
 }
 /******************** printOne *****************************
@@ -104,6 +104,7 @@ void printOne(Tree tree, char szId[])
     NodeT *pNode;
     pNode = tree->pRoot;
     pNode = findId(pNode, szId);
+    printf("*\n************************* PRINT ONE **************\n*\n");
         if(pNode != NULL)
         {
             printf("Title: %-8s\nID: %-8s\nType: %c\nCostInd: %c\nCost: %.2lf\n"
