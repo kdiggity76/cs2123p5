@@ -355,13 +355,12 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 			printf("ERROR: QUOTE definition is not BEGIN, OPTION, or END...\n");
 
 	}else if(strcmp(szToken, "DELETE") == 0){
-		/* deletes one item (and its pChild children )from the tree.
+        /*deletes one item (and its pChild children )from the tree.
 		It should not delete its siblings.  The deleted nodes
-		must be freed.  This is used from the DELETE command. //Move comment back to here after 5.2.
+		must be freed.  This is used from the DELETE command.*/
 		//get next token in buffer, which is the ID of the node to delete
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 		deleteItem(tree, szToken);
-*/
 
 	//not supposed to reach this level
 	}else{
