@@ -113,6 +113,8 @@ void printOne(Tree tree, char szId[])
                     ,pNode->element.cCostInd
                     ,pNode->element.dCost);
         }
+    else
+        printf("%s not found\n", szId);
 }
 /******************** freeSubTree *****************************
 void freeSubTree(NodeT *p)
