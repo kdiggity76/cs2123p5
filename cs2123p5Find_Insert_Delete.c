@@ -120,7 +120,7 @@ void deleteItem(Tree tree, char szId[])
     pkid = findId(tree->pRoot, szId);
     pParent = findParent(pParent, tree->pRoot, pkid);
 
-    pBeforeSibling = beforeSibling(&(pParent->pChild), pkid);
+    //pBeforeSibling = beforeSibling(&(pParent->pChild), pkid);
     pBeforeSibling->pSibling = pkid->pSibling;
     pkid->pSibling = NULL;
     freeSubTree(pkid);
