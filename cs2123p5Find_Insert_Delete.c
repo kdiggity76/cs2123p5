@@ -32,18 +32,18 @@ NodeT *findId(NodeT *p, char szId[])
         return findId(p->pChild, szId);
 }
 /******************** findParent *****************************
-NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
-Purpose:
+ NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
+ Purpose:
 
 
-Parameters:
+ Parameters:
 
 
-Notes:
+ Notes:
 
 
 
-**************************************************************************/
+ **************************************************************************/
 NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
 {
 
@@ -54,25 +54,24 @@ NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
 
     if (p == pkid)
         return pParent;
-    else
-    {
-        return findParent(p, p->pChild, pkid);
+    if (findParent(p, p->pChild, pkid) == NULL)
         return findParent(pParent, p->pSibling, pkid);
-    }
+    else
+        return findParent(p, p->pChild, pkid);
 }
 /******************** insertPriceMenu *****************************
-void insertPriceMenu(Tree tree, Element element, char szParentId[])
-Purpose:
+ void insertPriceMenu(Tree tree, Element element, char szParentId[])
+ Purpose:
 
 
-Parameters:
+ Parameters:
 
 
-Notes:
+ Notes:
 
 
 
-**************************************************************************/
+ **************************************************************************/
 void insertPriceMenu(Tree tree, Element element, char szParentId[])
 {
     NodeT *pkid;
@@ -93,39 +92,11 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
         {
             printf("\tParent Not Found\n");
             return;
-            //ErrExit(ERR_ALGORITHM, "Parent Not Found",...);
         }
         insertIntoSibling(&(pParent->pChild), element);
     }
 }
-/******************** deleteItem *****************************
-void deleteItem(Tree tree, char szId[])
-Purpose:
 
-
-Parameters:
-
-
-Notes:
-
-
-
-**************************************************************************/
-void deleteItem(Tree tree, char szId[])
-{
-    NodeT *pkid;
-    NodeT *pParent;
-    NodeT *pBeforeSibling;
-
-    pkid = findId(tree->pRoot, szId);
-    pParent = findParent(pParent, tree->pRoot, pkid);
-
-    //pBeforeSibling = beforeSibling(&(pParent->pChild), pkid);
-    pBeforeSibling->pSibling = pkid->pSibling;
-    pkid->pSibling = NULL;
-    freeSubTree(pkid);
-
-}
 /******************** insertIntoSibling *****************************
  void insertIntoSibling(NodeT **pp, Element element)
  Purpose:
@@ -147,9 +118,40 @@ void insertIntoSibling(NodeT **pp, Element element)
         insertIntoSibling(&((*pp)->pSibling), element);
 }
 
+NodeT *beforeSibling(NodeT *p, NodeT *pKid)
+{
+    if (p ==NULL)
+        return;
+    if (p->pSibling != pKid)
+        return beforeSibling(p->pSibling, pKid);
+    else
+        return p;
+}
+/******************** deleteItem *****************************
+ void deleteItem(Tree tree, char szId[])
+ Purpose:
+
+
+ Parameters:
+
+
+ Notes:
 
 
 
+ **************************************************************************/
+void deleteItem(Tree tree, char szId[])
+{
+    NodeT *pkid;
+    NodeT *pParent;
+    NodeT *pTemp;
 
+    pkid = findId(tree->pRoot, szId);
+    pParent = findParent(pParent, tree->pRoot, pkid);
+    pTemp = beforeSibling(pParent->pChild, pkid);
 
+    pTemp->pSibling = pkid->pSibling;
+    pkid->pSibling = NULL;
+    freeSubTree(pkid);
 
+}
