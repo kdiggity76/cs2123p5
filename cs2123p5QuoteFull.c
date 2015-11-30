@@ -26,18 +26,36 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
     newQuote.dTotalCost = 0.0;
 
     NodeT *pKid;
-    int q, i;
 
+    int q, i, k;
     //i count is the iLevel, q is the count of the queue
     //check for any "notFound"'s
     for(i = 0; i < quoteSelection->iQuoteItemCnt; i++)
     {
+
         if (quoteSelection->quoteItemM[i].dCost == -999999)
         {
             strcpy(newQuote.error.szOptionId, quoteSelection->quoteItemM[i].szOptionId);
             newQuote.returnCode = 2;
             return newQuote;
         }
+
+        for(k = 0; k < quoteSelection->iQuoteItemCnt; k++)
+        {
+
+            if(k == i)
+                continue;
+            else if(quoteSelection->quoteItemM[k].iLevel == quoteSelection->quoteItemM[i].iLevel)
+            {
+                if(strcmp(quoteSelection->quoteItemM[k].szOptionId, quoteSelection->quoteItemM[i].szOptionId) == 0)
+                {
+                    newQuote.returnCode = 2;
+                    return newQuote;
+                }
+
+            }
+        }
+
     }
     for(q = 0; q < quoteSelection->iQuoteItemCnt; q++)
     {
