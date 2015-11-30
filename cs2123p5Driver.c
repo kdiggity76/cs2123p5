@@ -94,6 +94,7 @@ Notes:
 #include <string.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "cs2123p5.h"
 
 int main()
@@ -110,7 +111,7 @@ int main()
         //printf("%s", szInputBuffer);
 
         // If the line is just a comment or empty, ignore it
-        if (szInputBuffer[0] == '*'  || szInputBuffer[0] == '\0')
+        if (szInputBuffer[0] == '*'  || szInputBuffer[0] == '\0' || szInputBuffer[0] == ' ' || szInputBuffer[0] == '\n')
             continue;                               // Command is a comment so skip it
 	//Driver function taken from cs2123p5.h
         processCommand(tree, quoteSelection, szInputBuffer);
@@ -361,9 +362,7 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 		//get next token in buffer, which is the ID of the node to delete
 		pszInput = getToken(pszInput, szToken, MAX_TOKEN_SIZE);
 		deleteItem(tree, szToken);
-    }else if(strcmp(szToken, "") == 0){
-        return;
-	//not supposed to reach this level
+	//not supposed to reach this level or is a space
 	}else{
 		printf("Unkown data received.\n");
 		printf("Last token read was %s...\n", szToken);
