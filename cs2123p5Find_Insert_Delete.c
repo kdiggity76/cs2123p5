@@ -88,6 +88,11 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
     else
     {
         pParent = findId(tree->pRoot, szParentId);
+        if (pParent->element.cNodeType == element.cNodeType)
+        {
+            printf("Define ERROR: Value cannot be linked to another value.\n");
+            return;
+        }
         if (pParent == NULL)
         {
             printf("\tParent Not Found\n");
@@ -148,10 +153,17 @@ void deleteItem(Tree tree, char szId[])
 
     pkid = findId(tree->pRoot, szId);
     pParent = findParent(pParent, tree->pRoot, pkid);
-    pTemp = beforeSibling(pParent->pChild, pkid);
-
-    pTemp->pSibling = pkid->pSibling;
-    pkid->pSibling = NULL;
+    if (pParent->pChild == pkid)
+    {
+        pParent->pChild = pkid->pSibling;
+        pkid->pSibling = NULL;
+    }
+    else
+    {
+        pTemp = beforeSibling(pParent->pChild, pkid);
+        pTemp->pSibling = pkid->pSibling;
+        pkid->pSibling = NULL;
+    }
     freeSubTree(pkid);
 
 }
