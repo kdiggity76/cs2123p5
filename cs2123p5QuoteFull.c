@@ -35,6 +35,7 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
 
         if (quoteSelection->quoteItemM[i].dCost == -999999)
         {
+            printf("*\n******************** QUOTE OPTION ERROR *********************\n*\n");
             strcpy(newQuote.error.szOptionId, quoteSelection->quoteItemM[i].szOptionId);
             newQuote.returnCode = 2;
             return newQuote;
@@ -49,6 +50,10 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
             {
                 if(strcmp(quoteSelection->quoteItemM[k].szOptionId, quoteSelection->quoteItemM[i].szOptionId) == 0)
                 {
+
+                    strcpy(newQuote.error.szOptionId, quoteSelection->quoteItemM[i].szOptionId);
+                    printf("*\n******************** QUOTE DUPLICATE OPTION ERROR *********************\n*\n");
+                    printf("Duplicate %s found.\n", newQuote.error.szOptionId);
                     newQuote.returnCode = 2;
                     return newQuote;
                 }
@@ -71,6 +76,7 @@ QuoteResult determineQuote(Tree tree, QuoteSelection quoteSelection)
             {
                 strcpy(newQuote.error.szOptionId, quoteSelection->quoteItemM[i].szOptionId);
                 newQuote.error.iSelection = quoteSelection->quoteItemM[q].iSelection;
+                printf("*\n******************** QUOTE SELECTION ERROR *********************\n*\n");
                 newQuote.returnCode = 3;
                 return newQuote;
             }
