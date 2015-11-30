@@ -1,0 +1,164 @@
+* Create the two root level OPTIONs
+DEFINE OPTION model ROOT Model
+DEFINE OPTION warranty ROOT Warranty
+* The model should appear before warranty
+PRINT ALL
+* Insert option values for model
+DEFINE VALUE base model Y 17000.00 Base
+DEFINE VALUE lx model Y 19000.00 Plus
+DEFINE VALUE oy model Y 26000.00 OY
+PRINT ALL
+* Insert options for base
+DEFINE OPTION engine_base base Engine
+DEFINE OPTION color_base base Color
+DEFINE OPTION audio_base base Audio
+* Insert options for lx
+DEFINE OPTION engine_LX lx Engine
+DEFINE OPTION color_LX lx Color
+DEFINE OPTION audio_LX lx Audio
+* Insert options for oy
+DEFINE OPTION engine_oy oy Engine
+DEFINE OPTION color_oy oy Color
+DEFINE OPTION audio_oy oy Audio
+* Show the price menu so far
+PRINT ALL
+PRINT ONE engine_base
+* Insert the option values for engine_base, color_base, and audio_base
+DEFINE VALUE eng18AutBase engine_base Y 0.00 1.8-liter 4 Cyl Automatic 
+DEFINE VALUE eng18ManBase engine_base Y 0.00 1.8-liter 4 Cyl 6spd Manual
+DEFINE VALUE whitebase color_base Y 0.00 White
+DEFINE VALUE bluebase color_base Y 50.00 Blue
+DEFINE VALUE audioStdBase audio_base Y 0.00 Audio Std
+DEFINE VALUE 8TrkBase audio_base Y -100.00 8-Track
+PRINT ALL
+PRINT ONE 8TrkBase
+* Insert the option values for engine_LX, color_LX, and audio_LX
+DEFINE VALUE eng18AutPlus engine_LX Y -100.00 1.8-liter 4 Cyl Automatic 
+DEFINE VALUE eng18ManPlus engine_LX Y 0.00 1.8-liter 4 Cyl 6spd Manual
+DEFINE VALUE whitePlus color_LX Y 0.00 Racing White
+DEFINE VALUE bluePlus color_LX Y 0.00 Deep Blue
+DEFINE VALUE metalCoal color_LX Y 50.00 Metallic Coal
+DEFINE VALUE audioStdPlus audio_LX Y 0.00 Audio Std
+DEFINE VALUE 8TrkPlus audio_LX Y 200.00 Surround
+* Insert option values for engine_oy, color_oy, and audio_oy
+DEFINE VALUE turbo engine_oy Y 0.00 Turbo 
+DEFINE VALUE turboElite engine_oy Y 2500.00 Turbo Elite
+DEFINE VALUE blackPearl color_oy Y -50.00 Black Pearl
+DEFINE VALUE seaGreen color_oy Y 0.00 Sea Green
+DEFINE VALUE empress color_oy Y 100.00 Empress
+DEFINE VALUE surroundStd audio_oy Y 0.00 Surround Std
+DEFINE VALUE surroundPrm audio_oy Y 250.00 Surround Premium 
+PRINT ALL
+* Insert the option values for warranty
+DEFINE VALUE warrany1 warranty Y 500.00 40k/3yr
+DEFINE VALUE warrany2 warranty Y 700.00 55k/4yr
+DEFINE VALUE warrany3 warranty Y 900.00 70k/5yr
+********************************** PRINT ALL ***********
+PRINT ALL
+*
+********************************* DEFINE errors *******
+*
+DEFINE VALUE warrany4 warrany3 Y 1200.00 90k/6yr
+DEFINE VALUE blackPearl color_LX Y 150.00 Black Pearl
+DEFINE VALUE whyAmIHere colour_LX Y 100.00 Gross Color
+*
+********************** more DEFINE errors ***********
+*
+DEFINE VALUE badie ROOT Y 10000.00 Badie
+DEFINE OPTION yuckie model Yuckie
+*
+* See if any of those made it into the tree
+* 
+PRINT ALL
+*
+********************************** QUOTE ***************
+*
+* This is a complete quote
+*
+QUOTE BEGIN
+QUOTE OPTION 0 model 1
+QUOTE OPTION 1 engine_base 1
+QUOTE OPTION 1 color_base 2
+QUOTE OPTION 1 audio_base 2
+QUOTE OPTION 0 warranty 2
+QUOTE END
+*
+********************************* PARTIAL QUOTE ********
+*
+QUOTE BEGIN 
+QUOTE OPTION 0 model 3
+QUOTE OPTION 1 engine_oy 2
+QUOTE OPTION 1 color_oy 2
+QUOTE OPTION 0 warranty 3
+QUOTE END
+*
+********************************* Bad Option ********
+*
+QUOTE BEGIN
+QUOTE OPTION 0 model 1
+QUOTE OPTION 1 engine_base 1
+QUOTE OPTION 1 colour_base 2
+QUOTE OPTION 1 audio_base 2
+QUOTE OPTION 0 warranty 2
+QUOTE END
+*
+********************************* Bad Value ********
+*
+QUOTE BEGIN
+QUOTE OPTION 0 model 1
+QUOTE OPTION 1 engine_base 1
+QUOTE OPTION 1 color_base 2
+QUOTE OPTION 1 audio_base 3
+QUOTE OPTION 0 warranty 2
+QUOTE END
+*
+************************************* Additional level of options
+*  These must be ok.
+*
+DEFINE OPTION upholstery bluebase Upholstery
+DEFINE VALUE pleather upholstery Y -200.00 Pleather
+DEFINE VALUE leather upholstery Y 500.00 Leather
+*
+* Print the tree showing the new level with upholstery
+* and its values pleather and leather
+*
+PRINT ALL
+*
+************************************ Use that option
+*
+* This is a complete quote including upholstery
+*
+QUOTE BEGIN
+QUOTE OPTION 0 model 1
+QUOTE OPTION 1 engine_base 1
+QUOTE OPTION 1 color_base 2
+QUOTE OPTION 2 upholstery 1
+QUOTE OPTION 1 audio_base 2
+QUOTE OPTION 0 warranty 2
+QUOTE END
+  
+******************************** DELETE OPTION VALUE **************
+*
+* Delete the seaGreen, but dont delete empress and blackPearl 
+*
+DELETE seaGreen
+PRINT ALL
+******************************** DELETE OPTION VALUE **************
+*
+* Delete the color_oy, but dont delete audio-oy and engine_oy
+*
+DELETE color_oy
+PRINT ALL
+*  
+PRINT ONE color_oy
+*
+* Insert a new warranty option value
+*
+DEFINE VALUE warrany4 warranty Y 2000.00 Forever
+PRINT ALL
+*
+* Delete the engine_base
+*
+DELETE engine_base
+*
+PRINT ALL
