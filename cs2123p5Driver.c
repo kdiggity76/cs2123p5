@@ -339,11 +339,12 @@ void processCommand(Tree tree, QuoteSelection quote, char szInputBuffer[]){
 				break;
 
 				case QUOTE_BAD_OPTION:
-					printf("\nOption ERROR: Option %s does not exist.\n\n", finalQuote.error.szOptionId);
+					printf("\nOption ERROR: %s is Invalid.\n\n", finalQuote.error.szOptionId);
+
 				break;
 
 				case QUOTE_BAD_SELECTION:
-					printf("\nSelection ERROR: Selection %d of Option %s does not exist.\n\n", finalQuote.error.iSelection, finalQuote.error.szOptionId);
+					printf("\nSelection ERROR: Selection %d of Option %s is Invalid.\n\n", finalQuote.error.iSelection, finalQuote.error.szOptionId);
 				break;
 
 				default:
