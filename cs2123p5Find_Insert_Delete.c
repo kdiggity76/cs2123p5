@@ -9,13 +9,13 @@
 
 /******************** findId *****************************
 NodeT *findId(NodeT *p, char szId[])
- 
+
 Purpose: This function will find the node of the Id that is passed in through its parameters
  and returns the address of the node. Will return NULL if Id is not found.
 
-Parameters: 
+Parameters:
     NodeT *p: The current/beginning node being passed to start searching
- 
+
     char szId[]: The Id passed in in order to find the its node.
 
 
@@ -37,16 +37,16 @@ NodeT *findId(NodeT *p, char szId[])
 }
 /******************** findParent *****************************
  NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
- 
+
  Purpose: Finds the logical parent node of the child node passed in as pkid.
  Will return the address of the parent node or return NULL if not found.
 
 
  Parameters:
     NodeT *pParent: The parent node being passed in in order to mark the parent location. it is initially NULL.
- 
+
     NodeT *p: The Node passed in to start searching recursively.
- 
+
     NodeT *pkid: The Node that will be used to find the parent.
 
 
@@ -72,17 +72,17 @@ NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
 }
 /******************** insertPriceMenu *****************************
  void insertPriceMenu(Tree tree, Element element, char szParentId[])
- 
+
  Purpose: This function will insert the node into the tree that is passed in the parameters.
  This function also contains a seperate function that helps in the insertion process.
 
 
  Parameters:
     Tree tree: The entire tree passed in to start searching/inserting from Root
- 
+
     Element element: The element structure that contains all the info of
             the node that needs to be inserted.
- 
+
     char szParentId[]: The Id of the parent to find where the Node should be inserted
 
 
@@ -109,6 +109,7 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
         pParent = findId(tree->pRoot, szParentId);
         if (pParent->element.cNodeType == element.cNodeType)
         {
+            printf("*\n************************* DEFINE ERROR *******************\n*\n");
             printf("Define ERROR: Value cannot be linked to another value.\n");
             return;
         }
@@ -123,14 +124,14 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
 
 /******************** insertIntoSibling *****************************
  void insertIntoSibling(NodeT **pp, Element element)
- 
+
  Purpose: This function is used in insertPriceMenu and it allocates space
         and inserts the new node into the tree.
 
 
  Parameters:
     NodeT **pp: The address of the node that needs to be inserted.
- 
+
     Element element: The element structure of the data that will be
             inserted into the node space.
 
@@ -148,21 +149,21 @@ void insertIntoSibling(NodeT **pp, Element element)
 }
 /******************** *beforeSibling *****************************
  NodeT *beforeSibling(NodeT *p, NodeT *pKid)
- 
- Purpose: This function works with the delete function to find the node before the 
+
+ Purpose: This function works with the delete function to find the node before the
         node that needs to be found.
- 
- 
+
+
  Parameters:
- 
+
     NodeT *p: The Node passed in to start searching recursively.
- 
+
     NodeT *pkid: The Node that will be used to find the parent.
- 
+
  Notes:
- 
- 
- 
+
+
+
  **************************************************************************/
 NodeT *beforeSibling(NodeT *p, NodeT *pKid)
 {
@@ -175,14 +176,14 @@ NodeT *beforeSibling(NodeT *p, NodeT *pKid)
 }
 /******************** deleteItem *****************************
  void deleteItem(Tree tree, char szId[])
- 
+
  Purpose: This function will delete the node that is passed in through the parameter
         and will keep the previous and upcoming nodes connected to each other.
 
 
  Parameters:
     Tree tree: The entire tree passed in to start searching/inserting from Root
-    
+
     char szId[]: The Id passed in in order to find the its node.
  Notes:
 

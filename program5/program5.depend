@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1448903698 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Driver.c
+1448908261 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5Driver.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
@@ -23,7 +23,7 @@
 	<stdlib.h>
 	"cs2123p5.h"
 
-1448906788 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5QuoteFull.c
+1448908261 source:/home/kdiggity/CS2123/program5/cs2123p5/cs2123p5QuoteFull.c
 	<stdio.h>
 	<string.h>
 	<stdarg.h>
