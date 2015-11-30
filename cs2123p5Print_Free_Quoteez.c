@@ -114,7 +114,7 @@ void printOne(Tree tree, char szId[])
                     ,pNode->element.dCost);
         }
     else
-        printf("%s not found\n", szId);
+        printf("Print ERROR: Unable to print %s not found.\n", szId);
 }
 /******************** freeSubTree *****************************
 void freeSubTree(NodeT *p)
