@@ -7,6 +7,17 @@
 #include <stdlib.h>
 #include "cs2123p5.h"
 
+
+NodeT *beforeSibling(NodeT *p, NodeT *pKid)
+{
+    if (p ==NULL)
+        return;
+    if (p->pSibling != pKid)
+        return beforeSibling(p->pSibling, pKid);
+    else
+        return p;
+}
+
 /******************** findId *****************************
  NodeT *findId(NodeT *p, char szId[])
  Purpose:
@@ -54,11 +65,10 @@ NodeT *findParent(NodeT *pParent, NodeT *p, NodeT *pkid)
     
     if (p == pkid)
         return pParent;
-    else
-    {
-        return findParent(p, p->pChild, pkid);
+    if (findParent(p, p->pChild, pkid) ==NULL)
         return findParent(pParent, p->pSibling, pkid);
-    }
+    else
+        return findParent(p, p->pChild, pkid);
 }
 /******************** insertPriceMenu *****************************
  void insertPriceMenu(Tree tree, Element element, char szParentId[])
@@ -93,11 +103,39 @@ void insertPriceMenu(Tree tree, Element element, char szParentId[])
         {
             printf("\tParent Not Found\n");
             return;
+            //ErrExit(ERR_ALGORITHM, "Parent Not Found",...);
         }
         insertIntoSibling(&(pParent->pChild), element);
     }
 }
-
+/******************** deleteItem *****************************
+ void deleteItem(Tree tree, char szId[])
+ Purpose:
+ 
+ 
+ Parameters:
+ 
+ 
+ Notes:
+ 
+ 
+ 
+ **************************************************************************/
+void deleteItem(Tree tree, char szId[])
+{
+    NodeT *pkid;
+    NodeT *pParent;
+    NodeT *pBeforeSibling;
+    
+    pkid = findId(tree->pRoot, szId);
+    pParent = findParent(pParent, tree->pRoot, pkid);
+    
+    pBeforeSibling = beforeSibling(pParent->pChild, pkid);
+    pBeforeSibling->pSibling = pkid->pSibling;
+    pkid->pSibling = NULL;
+    freeSubTree(pkid);
+    
+}
 /******************** insertIntoSibling *****************************
  void insertIntoSibling(NodeT **pp, Element element)
  Purpose:
@@ -119,43 +157,7 @@ void insertIntoSibling(NodeT **pp, Element element)
         insertIntoSibling(&((*pp)->pSibling), element);
 }
 
-NodeT *beforeSibling(NodeT *p, NodeT *pKid)
-{
-    if (p ==NULL)
-        return;
-    if (p->pSibling != pKid)
-        return beforeSibling(p->pSibling, pKid);
-    else
-        return p;
-}
-/******************** deleteItem *****************************
- void deleteItem(Tree tree, char szId[])
- Purpose:
- 
- 
- Parameters:
- 
- 
- Notes:
- 
- 
- 
- **************************************************************************/
-void deleteItem(Tree tree, char szId[])
-{
-    NodeT *pkid;
-    NodeT *pParent;
-    NodeT *pTemp;
-    
-    pkid = findId(tree->pRoot, szId);
-    pParent = findParent(pParent, tree->pRoot, pkid);
-    pTemp = beforeSibling(pParent->pChild, pkid);
-    
-    pTemp->pSibling = pkid->pSibling;
-    pkid->pSibling = NULL;
-    freeSubTree(pkid);
-    
-}
+
 
 
 
